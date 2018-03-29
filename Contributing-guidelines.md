@@ -124,3 +124,35 @@ Spaces and tabs are handled by ClangFormat, but blank lines are only partially h
 3.  Function bodies cannot have multiple consecutive blank lines, and a single blank line can only appear between two logical sections of the function.
 4.  Unit tests should follow the [AAA](http://wiki.c2.com/?ArrangeActAssert) pattern, and a single blank line must appear between consecutive "A" sections. No other blank lines are allowed in unit tests.
 5.  Enumeration definitions should have no blank lines between consecutive enumerators.
+
+`#include` statement grouping
+-----------------------------
+
+In general, all include statements should be present on the top of the file, ordered in the following groups, with two blank lines between each group:
+
+1. Related header file (e.g. `core/foo/bar.hpp` included in `core/foo/bar.cpp`, or in the unit test`core/test/foo/bar.cpp`)
+2. Standard library headers
+3. Third-party library headers
+4. Other Ginkgo headers
+
+_Example_: A file `core/base/my_file.cpp` might have an include list like this:
+
+```c++
+#include "core/base/my_file.hpp"
+
+
+#include <algorithm>
+#include <vector>
+#include <tuple>
+
+
+#include "third_party/blas/cblas.hpp"
+#include "third_party/lapack/lapack.hpp"
+
+
+#include "core/base/executor.hpp"
+#include "core/base/lin_op.hpp"
+#include "core/base/types.hpp"
+```
+
+_Note_: ClangFormat will take care of sorting the includes alphabetically in each group.
