@@ -77,7 +77,7 @@ private:
         // is there a papi_sde_destroy()? Seems there should be, but is not listed.
     }
 
-    void *handler;
+    void *handle_;
     mutable gko::int64 num_iterations;
     // counters for other events
 };
