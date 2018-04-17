@@ -90,10 +90,10 @@ Integrating `PapiLogger` into a Ginkgo solver
 auto mtx = /* get the system matrix */;
 auto b = /* get RHS */;
 auto x = /* get initial solution */;
-void *handle = /* obtain a PAPI handle */;                    # 1st PAPI-related line
-auto factory = Cg::Factory::create(/* solver parameters */);
+void *handle = /* obtain a PAPI handle */;             # PAPI init
+auto factory = Cg::Factory::create(/* parameters */);
 auto cg = factory->generate(gko::give(matrix));
-cg->add_logger(PapiLogger::create(handle));                   # 2nd PAPI-related line
+cg->add_logger(PapiLogger::create(handle));            # Add PAPI to solver
 cg->apply(gko::lend(b), gko::lend(x));
 ```
 
