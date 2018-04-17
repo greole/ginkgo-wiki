@@ -18,8 +18,8 @@ The code uses some of the internal Ginkgo's base classes, which do not depend on
 For reference, the implementation of these classes is at the end of the page.
 
 
-Version 1: using `papi_sde_register_event`
-------------------------------------------
+Version 1: using `papi_sde_register_counter`
+--------------------------------------------
 
 ```c++
 class PapiLogger : public Logger {
