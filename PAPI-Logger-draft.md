@@ -83,7 +83,7 @@ private:
 };
 ```
 
-Integrating `PapiLogger` into a Ginkgo solver
+Enable PAPI for a Ginkgo solver (user's code)
 ---------------------------------------------
 
 ```c++
