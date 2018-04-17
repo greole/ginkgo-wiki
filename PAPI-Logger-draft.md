@@ -7,7 +7,7 @@ Then, adding PAPI support to Ginkgo (after Ginkgo's general logging facilities a
 *  If using `papi_sde_register_counter`: __C + 4N__ statements.
 *  If using `papi_sde_log`: __C + 2N__ statements.
 
-In both cases, the user has to add __1__ additional statement to enable PAPI support for a Ginkgo object in their application.
+In both cases, the user has to add __1__ additional statement to enable PAPI integration for a Ginkgo object in their application.
 
 Implementation of `PapiLogger`
 ==============================
