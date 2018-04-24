@@ -1,5 +1,6 @@
 __NOTE__: This is a temporary document we can use to write the contributing guidelines, and once it's done we can include it directly into the repository.
 
+
 Code style
 ==========
 
@@ -156,3 +157,15 @@ _Example_: A file `core/base/my_file.cpp` might have an include list like this:
 ```
 
 _Note_: ClangFormat will take care of sorting the includes alphabetically in each group.
+
+
+Project structure
+=================
+
+Ginkgo is divided into a `core` module with common functionalities independent of the architecture, and several kernel modules (`reference`, `cpu`, `gpu`) wich contain low-level computational routines for each supported architecture.
+
+Extended header files
+---------------------
+
+Some header files from the core module have to be extended to include special functionality for specific architectures. An example of this is `core/base/math.hpp`, which has a GPU counterpart in `gpu/base/math.hpp`.
+For such files you should always include the version from the module you are working on, and this file will internally include its `core` counterpart.
