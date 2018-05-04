@@ -1,0 +1,1 @@
+![Ginkgo Library](https://github.com/ginkgo-project/ginkgo/blob/develop/assets/logo.png)
