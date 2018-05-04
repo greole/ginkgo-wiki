@@ -1,10 +1,22 @@
-Welcome to the Ginkgo wiki!
+![Ginkgo](https://raw.githubusercontent.com/ginkgo-project/ginkgo/develop/assets/logo.png)
 
-__TODO__: Write a nice homepage.
+About
+-----
 
-In the meantime, a few quick links:
+Welcome to the Ginkgo wiki pages! Ginkgo is a high-performance linear algebra library for manycore systems, with a focus on sparse solution of linear systems. It is implemented using modern C++ (you will need at least C++11 compliant compiler to build it), with GPU kernels implemented in CUDA. Currently, it runs on x86 and ARM CPUs, and Nvidia GPUs. It achieves high performance on GPUs, however the parallel CPU module is still not implemented (but coming soon!), so only a reference sequential implementation is available for CPUs. A multi-GPU module, as well as a hybrid CPU + multi-GPU module is planned in the future. Running across multiple nodes is not planned at this point.
 
-* [Contributing guidelines](Contributing-guidelines), still under construction.
-* A funny slideshow on how to [write good commit messages](https://www.slideshare.net/TarinGamberini/commit-messages-goodpractices). Most of the tools are designed around these conventions, so it will make all our lives a bit easier if everyone follows that. If you don't like cats, you can read [this](https://gist.github.com/robertpainsi/b632364184e70900af4ab688decf6f53) instead (but feel free to read both).
-* If by any chance you're still not using `BasicLinOp`, [here](Updating-linear-operators-to-use-BasicLinOp---instead-of-LinOp) is how you can convert your `LinOp`-based matrix/solver/preconditioner/whatever and simplify your life.
+Ginkgo is an academic project run by a group of researchers from several institutions: Karlsruhe Institute of Technology (Germany), Universitat Jaume I (Spain), and University of Tennessee (US). However, Ginkgo is not just about publishing academic papers. We care about building an open source library that will be used by the academic community to advance the understanding of sparse computations on modern hardware. We also care about building a high-quality library that can be used in comercial software. To facilitate both of these goals we try our best to design a modern and easy to use C++ interface, maintain extensive documentation for all parts of the library, cover the entire functionality with unit tests and provide a permissive 3-clause BSD licence.
+
+In This Wiki
+------------
+
+Here you will find a collection of resources related to the Ginkgo library. If you want to learn how to use Ginkgo, you can get started with [The Tutorial](Tutorial:-Building-a-2D-Poisson-Solver) (__under construction__, for now, you can see the syllabus, and what is, or will be available in Ginkgo). If you want to contribute to Ginkgo, or are one of our developers, see the [Developers Homepage](./Developers-Homepage), and especially the [Contributing Guidelines](./Contributing-guidelines). If you think you found a bug in Ginkgo, please use the [Issue Tracker](/ginkgo-project/ginkgo/issues) to report it (please label the issue with _bug_). If you have feature requests or suggestions about the interface or the code, also use the [Issue Tracker](/ginkgo-project/ginkgo/issues), and use the _proposal_ label.
+
+Contact Us
+----------
+
+If you have any questions, comments, or suggestions we would like to hear from you. Send us a message at one of the following e-mails:
+
+Hartwig Anzt <hartwig.anzt@kit.edu>  
+Goran Flegar <flegar@uji.es>
 
