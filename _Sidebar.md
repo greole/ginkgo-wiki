@@ -1,6 +1,6 @@
-[Home]()  
+[Home](./)  
 
-[Tutorial: Building a 2D Poisson Solver]()  
+[Tutorial: Building a 2D Poisson Solver](./Tutorial:-Building-a-2D-Poisson-Solver)  
 1.  [Getting Started]()
 2.  [Implement: Matrices]()
 3.  [Implement: Solvers]()
@@ -29,4 +29,4 @@
 
 [Documentation]()  
 
-[Contribute]()  
+[Contribute](./Contributing-guidelines)  
