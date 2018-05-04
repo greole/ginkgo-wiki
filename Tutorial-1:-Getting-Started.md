@@ -1,4 +1,4 @@
-Previous: [Building a 2D Poisson Solver](./Tutorial:-Building-a-2D-Poisson-Solver), Next: [Implement: Matrices](./Tutorial-2:-Implement:-Matrices)
+Previous: [Building a 2D Poisson Solver](./Tutorial:-Building-a-2D-Poisson-Solver); Next: [Implement: Matrices](./Tutorial-2:-Implement:-Matrices)
 
 Objectives
 ----------
@@ -20,4 +20,4 @@ Installation
 Running the examples [optional]
 -------------------------------
 
-Previous: [Building a 2D Poisson Solver](./Tutorial:-Building-a-2D-Poisson-Solver), Next: [Implement: Matrices](./Tutorial-2:-Implement:-Matrices)
+Previous: [Building a 2D Poisson Solver](./Tutorial:-Building-a-2D-Poisson-Solver); Next: [Implement: Matrices](./Tutorial-2:-Implement:-Matrices)
