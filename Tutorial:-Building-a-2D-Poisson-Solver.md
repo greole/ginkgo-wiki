@@ -6,4 +6,4 @@ This series is divided into 4 sections:
 3.  The [Optimize]() section will show you how to use Ginkgo's benchmarking and logging features to analize the performance of your solver, and show you how to improve the performance by using more suitable matrix formats and adding a preconditioner. You will also port your code to a GPU, to be able to use all the extra bandwidth it provides.
 4.  The last [Customize]() section will teach you about advanced concepts in Ginkgo and different ways in which Ginkgo can be extended for your applications specific need. In the first part of this section, you will improve your application with a custom stopping criterion and a custom logger, while the second part will show you how to squeeze the last bit of performance from your hardware by designing your own matrix format, solver and preconditioner which will benefit from the special structure of the Poisson matrix.
 
-Without wasting any more time, let's [Get started!]().
+Without wasting any more time, let's [Get started!](./Tutorial-1:-Getting-Started).
