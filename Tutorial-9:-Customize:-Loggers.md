@@ -1,6 +1,10 @@
+Previous: [Optimize: Using GPUs](./Tutorial-8:-Optimize:-Using-GPUs); Next: [Customize: Stopping Criterions](./Tutorial-10:-Customize:-Stopping-Criterions)
+
 Objectives
 ----------
 
 If you have reached this tutorial, you have seen what default implementation in Ginkgo have to offer. You should now be able to solve your own large linear systems using Ginkgo - congratulations! However, Ginkgo has a lot more to offer - it was build to be customizable and extensible, so you can easily combine it with custom implementation designed specifically for your application. In the next couple of tutorials you will learn how to extend almost every aspect of Ginkgo - we will start with simple objects, like custom loggers and stopping criteria, and move on to more complicated ones: matrix formats, solvers, and preconditioners.
 
 In this first advanced tutorial we will explain Ginkgo's design on a lower level - how are different object classes you already know related to each other, and explain Ginkgo's foundation classes and mixins which define and even automatically implement some of Ginkgo's core functionalities. You will learn about `gko::PolymorphicObject`, `gko::LinOp`, `gko::AbstractFactory`, `gko::log::Logger` and `gko::stop::Criterion` abstract classes. You will also learn about some of the `Enable*` mixins which implement parts of those abstract classes automatically. Then (to have some code, and not just theory in this tutorial), we will build a custom logger that will use the multiple color support of our terminal to draw a real-time 2D heatmap of the residual, which will give us more real-time information than just looking at the residual norm.
+
+Previous: [Optimize: Using GPUs](./Tutorial-8:-Optimize:-Using-GPUs); Next: [Customize: Stopping Criterions](./Tutorial-10:-Customize:-Stopping-Criterions)
