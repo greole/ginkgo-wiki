@@ -1,3 +1,6 @@
+Objectives
+----------
+
 In this tutorial we will gude you though the installation process of Ginkgo.
 
 Prerequisites
