@@ -1,1 +1,1 @@
-![Ginkgo Library](https://github.com/ginkgo-project/ginkgo/blob/develop/assets/logo.png)
+![Ginkgo Library](https://raw.githubusercontent.com/ginkgo-project/ginkgo/small_logo/assets/logo_small.png)
