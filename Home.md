@@ -18,5 +18,6 @@ Contact Us
 If you have any questions, comments, or suggestions we would like to hear from you. Send us a message at one of the following e-mails:
 
 Hartwig Anzt <hartwig.anzt@kit.edu>  
+Terry Cojean <terry.cojean@kit.edu>
 Goran Flegar <flegar@uji.es>
 
