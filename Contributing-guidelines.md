@@ -48,7 +48,7 @@ Functions use `snake_case`.
 
 ### Structures and classes
 
-Structures and classes which don't experience polymorphic behaviour (i.e. don't contain virtual methods, and don't have members which experience polymorphic behaviour) use `snake_case`.
+Structures and classes which do not experience polymorphic behaviour (i.e. do not contain virtual methods, nor members which experience polymorphic behaviour) use `snake_case`.
 
 All other structures and classes use `CamelCase`.
 
