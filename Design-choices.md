@@ -18,26 +18,28 @@ The first two are binary categories, and are well separated from the last two. E
 
 Conceptually, _nullability_ and _ownership_ are entirely independent categories, but this is not completely true in C++, as some of the combinations are emulated, or non-existent. Nullability is a binary attribute (_null_ or _non-null_), while owership is a ternary one, and can be one of the following:
 
-1.  _Temporary ownership_: the object is guaranteed to exist until the end of the current scope; the holder of the reference is not responsible for disposing the object.
-2.  _Unique ownership_: the object is guaranteed to exist until the holder keeps a reference; the holder of the reference is responsible for disposing the object; it is guaranteed that there is only one holder with non-temporary ownership.
-3.  _Shared ownership_: the object is guaranteed to exist until the holder keeps a reference; the holder of the reference is responsible for disposing the object if it is the last non-temporary owner; there might be multiple owners with non-temporary ownership.
+1.  _Temporary ownership_: the object is guaranteed to exist until the end of the current scope; the referece holder is not responsible for disposing of the object.
+2.  _Unique ownership_: the object is guaranteed to exist as long as the reference holder keeps the reference; the reference holder is responsible for disposing of the object; it is guaranteed that there is only one reference holder with non-temporary ownership.
+3.  _Shared ownership_: the object is guaranteed to exist as long as the reference holder keeps the reference; the reference holder is responsible for disposing the object if it is the last non-temporary reference holder; there can be multiple reference holders with non-temporary ownership.
 
-Note that the second kind of ownership can be viewed as a special case of the third one, so it is technically not required to distinguish between them, however due to efficiency reasons and caveats of shared ownership (i.e. one owner modifying the object without the other knowing about it), they are considered as 3 separate cases.
+Note that the second kind of ownership can be viewed as a special case of the third one, so it is technically not required to distinguish between them. However, due to efficiency reasons and caveats of shared ownership (i.e. one reference holder modifying the object without the other one knowing about it), they are considered as 3 separate cases.
 
 The following table demonstrates the problems with nullability vs ownership in C++, by showing how each combination of ownership and nullability is achieved for type `T`.
 
 
-|                         | non-nullable          | nullable                          |
-|:-----------------------:|:---------------------:|:---------------------------------:|
-| __temporary ownership__ | `T cv-qualifier &[&]` | `T cv-qualifier *`                |
-| __unique ownership__    | `T cv-qualifier`      | `std::unique_ptr<T cv-qualifier>` |
-| __shared ownership__    | _not supported_       | `std::shared_ptr<T cv-qualifier>` |
+|                         | non-nullable                         | nullable                               |
+|:-----------------------:|:------------------------------------:|:--------------------------------------:|
+| __temporary ownership__ | `T cv-qualifier &`                   | `T cv-qualifier *` <sup>&Dagger;</sup> |
+| __unique ownership__    | `T cv-qualifier` <sup>&dagger;</sup> | `std::unique_ptr<T cv-qualifier>`      |
+| __shared ownership__    | _not supported_                      | `std::shared_ptr<T cv-qualifier>`      |
 
-Thus, one of the important categories for Ginkgo: shared ownership of non-nullable objects, is not supported.
+### <sup>&dagger;</sup> Unique ownership of polymorphic non-nullable objects
 
-### Unique ownership of polymorphic non-nullable objects
+There is a problem with non-nullable object ownership when using polymorphic types, and that is [object slicing](https://en.wikipedia.org/wiki/Object_slicing). Basically, when transferring ownership from one non-nullable object to another, the polymorphic behavior of the object is lost.
 
-There is another problem with non-nullable object ownership when using polymorphic types, and that is [object slicing](https://en.wikipedia.org/wiki/Object_slicing). Basically, when transferring ownership from one non-nullable object to another, the polymorphic behavior of the object is lost.
+### <sup>&Dagger;</sup> Inconsistent interface of nullable object references with temporary ownership
+
+Nullable references with unique and shared ownership provide a `.get()` method which returns a reference to an object with temporary ownership. However, a reference with temporary ownership does not provide such a method, even though it is perfectly valid (and useful in contexts when the ownership of the original reference is not known). In addition, unique and shared ownership reference can be extended via inheritance, while the temporary ownership reference cannot.
 
 ### Conclusion
 
