@@ -158,6 +158,19 @@ _Example_: A file `core/base/my_file.cpp` might have an include list like this:
 
 _Note_: ClangFormat will take care of sorting the includes alphabetically in each group.
 
+Documentation style
+---------------------
+
+Documentation uses standard Doxygen.
+
+### Developer targeted notes
+Make use of `@internal` doxygen tag. This can be used for any comment which is not intended for users, but is useful to better understand a piece of code.
+
+## Whitespaces
+
+### After Doxygen tags
+All documentation tags should be followed by two spaces in order to better distinguish the text from the doxygen tag. It is also possible to use a line break instead.
+
 
 Project structure
 =================
