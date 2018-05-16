@@ -163,12 +163,12 @@ Documentation style
 
 Documentation uses standard Doxygen.
 
-### Developer targeted notes
+###  Developer targeted notes
 Make use of `@internal` doxygen tag. This can be used for any comment which is not intended for users, but is useful to better understand a piece of code.
 
-## Whitespaces
+### Whitespaces
 
-### After Doxygen tags
+#### After Doxygen tags
 All documentation tags should be followed by two spaces in order to better distinguish the text from the doxygen tag. It is also possible to use a line break instead.
 
 
