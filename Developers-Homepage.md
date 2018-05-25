@@ -12,6 +12,7 @@ Resources
 
 ### Lvalue vs Rvalue References, Move Semantics and Perfect Forwarding
 If you are interested in these topics, you should start by reading [Thomas Becker's article on the subject](http://thbecker.net/articles/rvalue_references/section_01.html) in 11 sections which introduce you to all of these subjects. Sections 4, 5 and 9 are important for efficient use of these concepts (you could make your code very inefficient otherwise).
+
 In [Scott Meyers' article](https://accu.org/var/uploads/journals/Overload111.pdf) you will learn that `&&` does not always mean rvalue-references, notably due to template reference collapsing rules (seen in section 8 of Thomas Becker's article). The same topic is covered in a [video](https://channel9.msdn.com/Shows/Going+Deep/Cpp-and-Beyond-2012-Scott-Meyers-Universal-References-in-Cpp11) if you prefer that format.
 
-A very simple and schematic way to view rvalues is an additional tool to standard references allowing pointer exchange through the reference system. `std::move(x)` converts its argument to an rvalue, and perfect forwarding (i.e. std::forward<X>(a)` is really about properly returning the proper reference to what `a` actually is (rvalue or lvalue).
+A very simple and schematic way to view rvalues is an additional tool to standard references allowing pointer exchange through the reference system. `std::move(x)` converts its argument to an rvalue, and perfect forwarding (i.e. `std::forward<X>(a)` is really about returning the proper reference to what `a` actually is (rvalue or lvalue).
