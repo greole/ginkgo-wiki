@@ -158,6 +158,12 @@ _Example_: A file `core/base/my_file.cpp` might have an include list like this:
 
 _Note_: ClangFormat will take care of sorting the includes alphabetically in each group.
 
+Code Blocks
+----------
+
+### Control flow constructs
+Single line statements should be avoided in all cases. Use of brackets is mandatory for all control flow constructs (e.g. `if`, `for`, `while`, ...).
+
 Documentation style
 ---------------------
 
