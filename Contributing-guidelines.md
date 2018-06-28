@@ -132,14 +132,16 @@ Spaces and tabs are handled by ClangFormat, but blank lines are only partially h
 In general, all include statements should be present on the top of the file, ordered in the following groups, with two blank lines between each group:
 
 1. Related header file (e.g. `core/foo/bar.hpp` included in `core/foo/bar.cpp`, or in the unit test`core/test/foo/bar.cpp`)
-2. Standard library headers
-3. Third-party library headers
+2. Standard library headers (e.g. <vector>
+3. Third-party library headers (e.g. <omp.h>)
 4. Other Ginkgo headers
 
 _Example_: A file `core/base/my_file.cpp` might have an include list like this:
 
 ```c++
 #include "core/base/my_file.hpp"
+
+#include <omp.h>
 
 
 #include <algorithm>
