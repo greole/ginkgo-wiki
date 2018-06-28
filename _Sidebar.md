@@ -27,6 +27,6 @@
 *   [Stopping Criterions](./Concepts:-Stopping-Criterions)
 *   [Executors](./Concepts:-Executors)
 
-[Documentation](/ginkgo-project/ginkgo/tree/develop/docs)  
+[Documentation](https://ginkgo-project.github.io/ginkgo/doc/develop)  
 
 [Contribute](./Developers-Homepage)  
