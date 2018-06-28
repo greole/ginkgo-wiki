@@ -132,8 +132,8 @@ Spaces and tabs are handled by ClangFormat, but blank lines are only partially h
 In general, all include statements should be present on the top of the file, ordered in the following groups, with two blank lines between each group:
 
 1. Related header file (e.g. `core/foo/bar.hpp` included in `core/foo/bar.cpp`, or in the unit test`core/test/foo/bar.cpp`)
-2. Standard library headers (e.g. <vector>
-3. Third-party library headers (e.g. <omp.h>)
+2. Standard library headers (e.g. `vector`)
+3. Third-party library headers (e.g. `omp.h`)
 4. Other Ginkgo headers
 
 _Example_: A file `core/base/my_file.cpp` might have an include list like this:
@@ -160,14 +160,28 @@ _Example_: A file `core/base/my_file.cpp` might have an include list like this:
 
 _Note_: ClangFormat will take care of sorting the includes alphabetically in each group.
 
-Code Blocks
-----------
+Other Code Formatting not handled by ClangFormat
+------------------------------------------------
 
 ### Control flow constructs
 Single line statements should be avoided in all cases. Use of brackets is mandatory for all control flow constructs (e.g. `if`, `for`, `while`, ...).
 
+### Variable declarations
+
+C++ supports declaring / defining multiple variables using a single _type-specifier_.
+However, this is often very confusing as references and pointers exhibit strange behavior:
+
+```c++
+template <typename T> using pointer = T *;
+
+int *        x, y;  // x is a pointer, y is not
+pointer<int> x, y;  // both x and y are pointers
+```
+
+For this reason, __always__ declare each variable on a separate line, with its own _type-specifier_.
+
 Documentation style
----------------------
+-------------------
 
 Documentation uses standard Doxygen.
 
