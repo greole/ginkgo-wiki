@@ -204,3 +204,7 @@ Extended header files
 
 Some header files from the core module have to be extended to include special functionality for specific architectures. An example of this is `core/base/math.hpp`, which has a GPU counterpart in `gpu/base/math.hpp`.
 For such files you should always include the version from the module you are working on, and this file will internally include its `core` counterpart.
+
+Using library classes
+---------------------
+Creating new classes, it is allowed to use existing classes (polymorphic objects) inside the kernels for the distinct backends (reference/cuda/omp...). However,  it is not allowed to construct the kernels by creating new instances of a distinct (existing) class as this can result in compilation problems.
