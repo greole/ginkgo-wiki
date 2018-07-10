@@ -207,4 +207,6 @@ For such files you should always include the version from the module you are wor
 
 Using library classes
 ---------------------
-Creating new classes, it is allowed to use existing classes (polymorphic objects) inside the kernels for the distinct backends (reference/cuda/omp...). However,  it is not allowed to construct the kernels by creating new instances of a distinct (existing) class as this can result in compilation problems.
+Creating new classes, it is allowed to use existing classes (polymorphic objects) inside the kernels for the distinct backends (reference/cuda/omp...). However,  it is not allowed to construct the kernels by creating new instances of a distinct (existing) class as this can result in compilation problems. 
+
+For example, when creating a new matrix class `AB` by combining existing classes `A` and `B`, the `AB::apply()` function composed of kernel invocations to `A::apply()` and `B::apply()` can only be defined in the core module, it is not possible to create instances of `A` and `B` inside the `AB` kernel file.
