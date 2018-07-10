@@ -1,3 +1,4 @@
+```c++
 // Templates
 
 // godbolt.org - compiler explorer (lets you compile code with different compiler and see the assembly)
@@ -435,3 +436,28 @@ typename std::common_type<First, Rest...>::type sum(First first, Rest... rest) {
 double test25() {
     return sum(3, 4.5, 2.1, 10, 12);
 }
+
+template <typename T, T V>
+struct integral_constant {
+    static constexpr auto value = V;
+};
+
+struct false_type : integral_constant<bool, false> {};
+
+struct true_type : integral_constant<bool, true> {};
+
+template <typename T, typename U>
+struct is_same : false_type {};
+
+template <typename T>
+struct is_same<T, T> : true_type {};
+
+bool test1() {
+    return is_same<int, int>::value; // true
+}
+
+
+bool test2() {
+    return is_same<int, double>::value; // false
+}
+```
