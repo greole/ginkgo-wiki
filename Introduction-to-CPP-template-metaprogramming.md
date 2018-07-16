@@ -665,49 +665,48 @@ composition, evaluation) can be extended to templates. This is the first
 step towards understanding templates not just as "blueprints" for the compiler,
 but as a separate "metalanguage" within the language (C++) itself. The rest of
 this tutorial will introduce advanced features of templates which can be used
-to implement flow control and iteration in this language. However, the result
+to implement flow control and iteration in this metalanguage. However, the result
 will be a purely functional language, so metaprograms written in it will look
 quite a bit different than regular C++ programs (though avid Haskell lovers
 will feel right at home).
 
 Before delving into advanced features, we need to solve a small problem with
 metafunctions: they always produce __new__ types, and it is impossible for a
-type template to return a type already known. The reasons for this drawback
-are mostly historical, as templates were in fact first designed to provide
-"blueprints", and only later user for metaprogramming. Fortunately, there is a
-simple workaround for this problem: metafunctions that want to return an
+type template to return a type already defined somewhere else. The reasons for
+this drawback are mostly historical, as templates were in fact first designed to
+provide "blueprints", and only later user for metaprogramming. Fortunately, there
+is a simple workaround for this problem: metafunctions that want to return an
 already existing type will return a new type (as that is why they have to do),
-which only has a single type member. This member is a type alias for the old
-type they actually return. By convention, this member is called `type`.
+which only has a single type member. This member is a type alias for the already
+existing type they actually return. By convention, this member will be called
+`type`.
 
 As an example, we can create a simple metafunction called `void_type` that
 takes any type, and always returns `void`:
 
+__\[[try it](https://godbolt.org/g/R4mNZ9)\]__
 ```c++
 template <typename T>
-struct void_type {
-    using type = void;
-};
+struct void_type { using type = void; };
 
-int main() {
-    void_type<int>::type *t;  // t is a void pointer
-}
+static_assert(is_same<void_type<int>::type, void>::value);
+static_assert(is_same<void_type<const char *>::type, void>::value);
 ```
 
 Even though this function seems quite useless at first glance, it will prove to
-be quite a powerful tool later on. A variation of it has even been integrated
+be a powerful tool later on. A variation of it has even been integrated
 into the C++17 standard under the name `std::void_t`.
 
 Also notice that the type `T` is not used. As in regular functions, it is
 allowed to have unused parameters, and in that case the parameter identifier
 can be omitted:
 
+__\[[try it](https://godbolt.org/g/85LyQV)\]__
 ```c++
-template<typename>
-struct void_type {
-    using type = void;
-};
+template<typename> struct void_type { using type = void; };
 ```
+
+__STOPPED HERE__
 
 However, `void_type<int>` and `void_type<double>` are still distinct types,
 even though `void_type<int>::type` and `void_type<double>::type` are aliases of
