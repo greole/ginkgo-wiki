@@ -706,22 +706,27 @@ __\[[try it](https://godbolt.org/g/85LyQV)\]__
 template<typename> struct void_type { using type = void; };
 ```
 
-__STOPPED HERE__
-
 However, `void_type<int>` and `void_type<double>` are still distinct types,
 even though `void_type<int>::type` and `void_type<double>::type` are aliases of
-the same type.
+the same type:
+
+__\[[try it](https://godbolt.org/g/pSDCy9)\]__
+```c++
+static_assert(is_same<void_type<int>, void_type<int>>::value);
+static_assert(!is_same<void_type<int>, void_type<double>>::value);
+```
 
 Metafunctions that return values
 --------------------------------
 
-The idea from the previous section can also be used to implement metafunctions
+The idea from the previous section can be used to implement metafunctions
 that return values by using a compile-time static member variable instead of a
-member type alias. Since C++11 making sure that this variable has been
-computed at compile time can be done by using the `constexpr` keyword. The
-convention is to call this member `value`. For example, the following
+member type alias. Since the C++11 standard, making sure that this variable
+has been computed at compile time can be done by using the `constexpr` keyword.
+The convention is to call this member `value`. For example, the following
 metafunction returns the size of the larger object:
 
+__\[[try it](https://godbolt.org/g/uYMt2N)\]__
 ```c++
 template <typename U, typename T>
 struct size_of_larger {
@@ -729,18 +734,18 @@ struct size_of_larger {
         sizeof(U) : sizeof(T);
 };
 
-int main() {
-    std::cout << size_of_larger<int, double>::value << std::endl;  // prints 8
-}
+static_assert(size_of_larger<int, double>::value == 8, "");
+static_assert(size_of_larger<double, char>::value == 8, "");
 ```
 
 `constexpr` functons
 --------------------
 
-If a metafunction only has non-type parameters, and returns a non-type result,
-an equivalent runtime version of the function can always be implemented.
-For example, here is a function and a metafunction that sums two integers:
+If a metafunction contains only non-type parameters, and returns a non-type
+result, an equivalent runtime version of the function can always be implemented.
+For example, here is a function and a metafunction that sum two integers:
 
+__\[[try it](https://ideone.com/N6Fdgj)\]__
 ```c++
 int sum(int x, int y) { return x + y; }
 
@@ -749,11 +754,13 @@ struct msum {
     static constexpr auto value = X + Y;
 };
 
+
+volatile int x = 3;
+volatile int y = 5;
+
 int main() {
-    std::cout << sum(3, 5) << std::endl;         // 8
-    std::cout << msum<3, 5>::value << std::endl  // 8
-    array<int, msum<3, 5>::value> arr;  // array of 8 elements, sum(3, 5)
-                                        // cannot be used in this case
+    assert(sum(x, y) == 8);
+    static_assert(msum<3, 5>::value == 8);
 }
 ```
 
@@ -764,14 +771,17 @@ evaluated at compile-time, and its result will be a compile-time constant. The
 syntax for writing a `constexpr` function is the same as for the regular
 function, with the addition of the `constexpr` qualifier:
 
+__\[[try it](https://ideone.com/hH8wzC)\]__
 ```c++
 constexpr int sum(int x, int y) { return x + y; }
-
+ 
+ 
+volatile int x = 3;
+volatile int y = 5;
+ 
 int main() {
-    std::cin >> x >> y;
-    std::cout << sum(x, y) << std::end;  // can be used with runtime args.
-    array<int, sum(3, 5)> arr;  // when used with compile-time values, it
-                                // produces a compile-time value
+    assert(sum(x, y) == 8);
+    static_assert(sum(3, 5) == 8);
 }
 ```
 
@@ -784,9 +794,14 @@ lifted in C++14).
 Distinguishing between type and data members
 --------------------------------------------
 
-Types and values are used in different context, but when they are members, both
-are called in the same way:
+Types and values are used in different contexts, but the syntax for accessing
+type members of a type is equivalent to the syntax for accessing its data members.
+Usually, the compiler can only deduce if a member of a type template is a
+data or a type member if the argument list does not contain template parameters.
+If it does, the compiler assumes it is a data member. If it is a type member,
+the `typename` keyword can be used to convey that information to the compiler.
 
+__\[[try it](https://godbolt.org/g/3WKHy5)\]__
 ```c++
 template <typename T>
 struct foo {
@@ -800,27 +815,20 @@ struct bar {
 
 // foo<int>::baz is a type
 // bar<int>::baz is a value
-```
 
-Usually, the compiler can only deduce if a class template member is a data or a
-type member if the argument list does not contain template parameters. If it
-does, the compiler will assume it is a data member. If it is a type member,
-the `typename` keyword can be used to convey that information to the compiler.
-
-```c++
 template <typename T>
-void f() {
+void test() {
     foo<int>::baz x;         // ok, the compiler knows foo<int>::baz is a type
     x = bar<int>::baz;       // ok, the compiler knows bar<int>::baz is a value
     // foo<T>::baz y;     // error, the compiler assumes foo<T>::baz is a value
     typename foo<T>::baz y;  // ok, explicitly saying foo<T>::baz is a type
-    y = bar<T>::baz;         // ok, the compiler 
+    y = bar<T>::baz;         // ok, the compiler assume bar<T>::baz is a value
 }
 ```
 
-Why the compiler has this restriction will become clear in the
-[Explicit specialization]() section. For now, it is enough to remember this
-rule.
+Why the compiler cannot deduce this correctly will become clear in the
+[Explicit specialization](#Explicit-specialization) section. For now, it is enough
+to remember this rule.
 
 Argument binding and `integral_constant`
 ----------------------------------------
@@ -832,6 +840,7 @@ new function that has less parameters. Mathematically, for a function
 metafunctions could be done by creating a new function that calls the original
 function (similarly to the way this is done for regular functions):
 
+__\[[try it](https://godbolt.org/g/Z7xpmQ)\]__
 ```c++
 template <typename T, int N>
 struct g {
@@ -847,11 +856,15 @@ template <int N>
 struct g_int {
     using type = typename g<int, N>::type;
 };
+
+static_assert(is_same<g_5<int>::type, g<int, 5>::type>::value, "");
+static_assert(is_same<g_int<5>::type, g<int, 5>::type>::value, "");
 ```
 
-However, metafunctions allow a more elegant way of doing it by exploiting
-inheritance:
+However, with metafunctions the same can be achieved in a more
+elegant way by exploiting inheritance:
 
+__\[[try it](https://godbolt.org/g/ZbyTdV)\]__
 ```c++
 template <typename T>
 struct g_5 : g<T, 5> {};
@@ -861,16 +874,22 @@ struct g_int : g<int, N> {};
 ```
 
 Here, `g_5` and `g_int` inherit the type `type` from `g<T, 5>` and
-`g<int, N>` respectively, which then becomes their return value.
+`g<int, N>` respectively, which then becomes their "return value".
 
 A useful example of this is a metafunction `integral_constant` which maps a
 type and a value of that type into that same value:
 
+__\[[try it](https://godbolt.org/g/69ih4Z)\]__
 ```c++
 template <typename T, T V>
 struct integral_constant {
-    static constexpr auto value = V;
+    static constexpr T value = V;
 };
+
+static_assert(is_same<
+    decltype(integral_constant<int, 5>::value),
+    const int>::value, "");
+static_assert(integral_constant<int, 5>::value == 5, "");
 ```
 
 This utility function can be used to simplify the implementation of
@@ -878,12 +897,16 @@ metafunctions which return a value, as they can simply inherit a specialization
 of this class with the type set to the return type, and the value to the
 expression that produces the return value.
 Two further types that inherit from `integral_constant` are useful when
-implementing function that return a boolean:
+implementing functions that return a boolean:
 
+__\[[try it](https://godbolt.org/g/w97b8C)\]__
 ```c++
 struct true_type : integral_constant<bool, true> {};
 
 struct false_type : integral_constant<bool, false> {};
+
+static_assert(true_type::value == true, "");
+static_assert(false_type::value == false, "");
 ```
 
 `integral_constant` can also be used to "typify" a value (i.e. use a type to
