@@ -1,3 +1,5 @@
+Previous: [Metafunctions](./Introduction-to-Template-Metaprogramming:-Metafunctions); Next: [Variadic Templates](./Introduction-to-Template-Metaprogramming:-Variadic-Templates)
+
 The previous sections set the stage and introduced the concepts needed to write
 metafunctions. This section describes the last missing piece of the puzzle
 which will allow us to implement `if` statements and perform iteration needed
@@ -843,3 +845,5 @@ metafunctions, like modifying the merge sort algorithm to take a custom
 comparator for comparing the values.
 For more details about `template template` parameters see
 [cpprerence](https://en.cppreference.com/w/cpp/language/template_parameters).
+
+Previous: [Metafunctions](./Introduction-to-Template-Metaprogramming:-Metafunctions); Next: [Variadic Templates](./Introduction-to-Template-Metaprogramming:-Variadic-Templates)
