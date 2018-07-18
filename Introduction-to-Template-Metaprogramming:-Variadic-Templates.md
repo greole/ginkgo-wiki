@@ -1,3 +1,5 @@
+Previous: [Explicit Specialization](./Introduction-to-Template-Metaprogramming:-Explicit-Specialization); Top: [Introduction](./Introduction-to-Template-Metaprogramming)
+
 C++11 enabled templates with variable number of parameters ("variadic
 templates") by introducing "template parameter packs". A template parameter
 pack is a list of template parameters of the same kind (type, any type of
@@ -384,3 +386,5 @@ metaprograms, taking a look at the metafunctions available in the
 metaprogramming), and looking into some of the template metaprogramming
 libraries available in
 [boost](https://www.boost.org/doc/libs/?view=category_metaprogramming).
+
+Previous: [Explicit Specialization](./Introduction-to-Template-Metaprogramming:-Explicit-Specialization); Top: [Introduction](./Introduction-to-Template-Metaprogramming)
