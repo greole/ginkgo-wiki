@@ -1764,7 +1764,7 @@ For more details about `template template` parameters see
 Variadic templates
 ==================
 
-C++11 introduced templates with variable number of parameters ("variadic
+C++11 enabled templates with variable number of parameters ("variadic
 templates") by introducing "template parameter packs". A template parameter
 pack is a list of template parameters of the same kind (type, any type of
 integer, point, or enumeration) and is specified by appending an ellipsis
@@ -1774,6 +1774,7 @@ is the `void_type` type template and `void_t` type alias template (this is the
 version in the C++ standard), which converts any number of arguments into
 `void`:
 
+__\[[try it](https://godbolt.org/g/V8kQaj)\]__
 ```c++
 template <typename... Ts> struct void_type { using type = void; };
 
@@ -1784,6 +1785,7 @@ static_assert(is_same<void_type<>::type, void>::value, "");
 As with normal template parameters, names of template parameter packs can be
 omitted if not used:
 
+__\[[try it](https://godbolt.org/g/mBZQ6C)\]__
 ```c++
 template<typename...> struct void_type { using type = void; };
 
@@ -1793,8 +1795,9 @@ static_assert(is_same<void_type<>::type, void>::value, "");
 
 Template parameter packs cannot be used directly, but have to be expanded into
 a list of parameters by using the ellipsis operator. For example, parameter
-pack expansion can be used to implement `void_t` type alias template:
+pack expansion can be used to implement the `void_t` type alias template:
 
+__\[[try it](https://godbolt.org/g/WFji3d)\]__
 ```c++
 template <typename... Ts> using void_t = typename void_type<Ts...>::type;
 
@@ -1805,17 +1808,19 @@ static_assert(is_same<void_t<>, void>::value, "");
 `void_t` can be used to wrap multiple dummy parameters that use SFINAE into a
 single parameter:
 
+__\[[try it](https://godbolt.org/g/z7f7yW)\]__
 ```c++
 // check if T has type members foo and bar
-template <typename T, typename = void> has_foo_and_bar : false_type {};
+template <typename T, typename = void>
+struct has_foo_and_bar : false_type {};
 
-template <typename T> has_foo_and_bar<T, void_t<
-    decltype(typename T::foo),
-    decltype(typename T::bar)>> : true_type {};
+template <typename T>
+struct has_foo_and_bar<T,
+    void_t<typename T::foo, typename T::bar>> : true_type {};
 
 
-struct X { using foo = int; }
-struct Y { using bar = float; }
+struct X { using foo = int; };
+struct Y { using bar = float; };
 struct Z : X, Y {};
 
 static_assert(!has_foo_and_bar<X>::value, "");
@@ -1826,6 +1831,7 @@ static_assert(has_foo_and_bar<Z>::value, "");
 The number of parameters in the parameter pack can be checked using the
 `sizeof...` operator:
 
+__\[[try it](https://godbolt.org/g/EYdWze)\]__
 ```c++
 template <typename... Ts> struct has_many_parameters :
     integral_constant<bool, (sizeof...(Ts) > 4)> {};
@@ -1839,21 +1845,23 @@ However, there can only be one parameter pack, and it has to be the last
 parameter. This can be used to implement a metafunction which returns the first
 of all the parameters passed to it:
 
+__\[[try it](https://godbolt.org/g/sgAfq4)\]__
 ```c++
-template <typename T, typename...> using first = T;
+template <typename T, typename...> using first_t = T;
 
-static_assert(is_same<first<int, float, int>, int>::value, "");
-static_assert(is_same<first<double, float, int>, double>::value, "");
+static_assert(is_same<first_t<int, float, int>, int>::value, "");
+static_assert(is_same<first_t<double, float, int>, double>::value, "");
 ```
 
-Parameter packs can also be used in partial specialization. Usually, some of
-the parameters of the parameter pack of the base template are mapped to
-individual parameters of the specialization, while the remaining ones are
-mapped to the parameter pack of the specialization. This allows implementing
+Parameter packs can also be used in partial specializations. Usually, some of
+the parameters of the parameter pack of the base template are matched by
+individual parameters of the specialization, while the remaining ones by the
+parameter pack wildcard of the specialization. This allows implementing
 iteration over parameter packs, and processing individual parameters from the
 pack. For example, the `is_same` metafunction can be extended to template 
 parameter packs by comparing every two adjacent elements of the pack:
 
+__\[[try it](https://godbolt.org/g/akmRgt)\]__
 ```c++
 template <typename...> struct is_same : true_type {};
 template <typename T, typename... Rest>
@@ -1868,13 +1876,14 @@ static_assert(is_same<int, int, int>::value, "");
 static_assert(!is_same<int, int, float>::value, "");
 ```
 
-Specializations can contain more than one template parameter packs, but the
+Specializations can contain more than one template parameter pack, but the
 list after the name of the specialization still has the same restrictions on
 parameter packs as the base template. However, this still means that more
 complex patterns can be matched using parameter packs. For example, to check if
 two `void_type` metafunctions received the same parameters, one could do the
 following:
 
+__\[[try it](https://godbolt.org/g/ccqfeV)\]__
 ```c++
 template <typename VoidType1, typename VoidType2>
 struct have_same_params : true_type {};
@@ -1898,13 +1907,14 @@ Parameter transformations (e.g. applying a metafunction) can be applied to the
 entire parameter pack, not just a single parameter. In this case, the result
 will be a new pack, with the transformation applied to each parameter.
 
+__\[[try it](https://godbolt.org/g/LZxWVY)\]__
 ```c++
 template <typename... Ts> struct num_args
     : integral_constant<int, sizeof...(Ts)> {};
 
 template <typename... Ts> struct test1 : num_args<Ts...> {};
 template <typename... Ts> struct test2 : num_args<void_t<Ts...>> {};
-template <typename... Ts> struct test3 : num_args<void_t<Ts>...> {};
+template <typename... Ts> struct test3 : num_args<void_t<Ts>...> {}; // <<<
 
 static_assert(test1<int, int, int>::value == 3, ""); // int, int, int
 static_assert(test2<int, int, int>::value == 1, ""); // void
@@ -1913,18 +1923,15 @@ static_assert(test3<int, int, int>::value == 3, ""); // void, void, void
 
 Parameter packs can also be expanded in the inheritance list:
 
+__\[[try it](https://godbolt.org/g/7UaL3F)\]__
 ```c++
 template <typename... Ts> struct inherits : Ts... {};
 
 
 struct X { using foo = void; };
 struct Y { using bar = void; };
-
-// check if inherits<X, Y> has foo and bar
-template <typename T, typename = void> struct has_foo_and_bar : false_type {};
-template <typename T> struct has_foo_and_bar<T, 
-    void_t<typename T::foo, typename T::bar>> : true_type {};
-static_assert(has_foo_and_bar<inherits<X, Y>>::value);
+using foo = inherits<X, Y>::foo;
+using bar = inherits<X, Y>::bar;
 ```
 
 Finally, function templates can also use template parameter packs. Expanding a
@@ -1934,14 +1941,15 @@ list. Similarly to template argument packs, the function parameter pack has to
 be the last parameter of the function. Function parameter packs behave in the
 same way as template parameter packs.
 
-Unlike type and type alias templates, function templates can have parameter
-after the template parameter pack, and those arguments can even be other
+Unlike type and type alias templates, function templates can have parameters
+after the template parameter pack, and those parameters can even be other
 parameter packs, as long as all template parameters after the first template
 parameter pack can be deduced from the function arguments.
 
 Parameter packs in function templates can be used to implement type-safe
 variadic functions:
 
+__\[[try it](https://ideone.com/iiLS9w)\]__
 ```c++
 template <typename T, typename... Rest> struct sum_type {
     using type = decltype(
@@ -1972,16 +1980,17 @@ it is impossible to return a parameter pack from a metafunction:
 
 ```c++
 template <typename... Ts, typename... Us>  // error - multiple parameter packs
-struct identity {
+struct concat {
     using type = Ts..., Us...;  // error - cannot alias a parameter pack
 };
 ```
 
-However, parameter packs can stil be used for compile-time arrays if wrapped
+However, parameter packs can still be used for compile-time arrays if wrapped
 into a type template, and combined with partial specialization to obtain the
 elements from the pack:
 
 
+__\[[try it](https://godbolt.org/g/R4PKJP)\]__
 ```c++
 // structure representing an array of types
 template <typename...> struct type_array {};
@@ -2054,12 +2063,14 @@ static_assert(is_same<
     front_t<type_array<int, bool, char>>,
     int>::value);
 static_assert(is_same<
-    back_t<type_array
+    back_t<type_array<int, bool, char>>,
+    char>::value);
 ```
 
 To implement value arrays, the values can simply be "typified" using
 `integral_constant` and then added to `type_array`:
 
+__\[[try it](https://godbolt.org/g/RYqVc5)\]__
 ```c++
 #define TYPIFY(x) integral_constant<decltype((x)), (x)>
 #define DETYPIFY(x) x::value
@@ -2078,24 +2089,30 @@ Handling of type arrays in metafunctions relies on partial specialization.
 However, partial specialization is not supported by function templates.
 Luckily, there is a way to work around this limitation. The idea is to not use
 template arguments in functions directly, but to add dummy function parameters
-which will be used to deduce the correct template parameters. These parameters
-will never get used in the function body, and will be optimized-away by the
-compiler. Their only purpose is to enable template parameters to be passed in a
-more general way. For example, a function that takes a list of constant
+which will be used to deduce the correct template parameters. These dummy
+parameters will never get used in the function body, and will be optimized away
+by the compiler. Their only purpose is to enable template parameters to be passed
+in a more general way. For example, a function that takes a list of constant
 coefficients packed into a type array and does a linear combination of these
 coefficients with values known at runtime can be written as follows:
 
+__\[[try it](https://ideone.com/TjtftS)\]__
 ```c++
+template <typename FirstCoef, typename T>
+T combine(type_array<FirstCoef>, const T &value) {
+    return DETYPIFY(FirstCoef) * value;
+}
+ 
 template <typename FirstCoef, typename... OtherCoefs,
           typename T, typename... Ts>
 T combine(
     type_array<FirstCoef, OtherCoefs...>, // dummy parameter
-    const T &value, const T &... other_values) {
+    const T &value, const Ts &... other_values) {
     return DETYPIFY(FirstCoef) * value +
         combine(type_array<OtherCoefs...>{}, other_values...);
 }
-
-
+ 
+ 
 int main() {
     using coefs = type_array<TYPIFY(5), TYPIFY(2), TYPIFY(3)>;
     assert(combine(coefs{}, 1, 3, 2) == 5 + 3 * 2 + 3 * 2);
@@ -2105,16 +2122,16 @@ int main() {
 Conclusion
 ==========
 
-Congratulations for making it all the way to the end of this tutorial. You
+Congratulations for making it all the way to the end of this tutorial! You
 should now have the basic understanding of templates, how they can be used to
 reduce the amount of code that needs to be written, how to write metafunctions
 that manipulate types or values and are evaluated at compile time, including
-how to write conditional statements and iterations in them, and how to use
-parameter packs to write variadic functions, and create metafunctions that
+how to write conditional statements and iterations in metafunctons, and how to
+use parameter packs to write variadic functions, and create metafunctions that
 operate on sequences of values.
 
 Additionally you have seen (in some cases simplified) implementations of useful
-functions that are also available in the C++ standard:
+utilities that are also available in the C++ standard:
 
 *   `std::max` (`<algorithm>`)
 *   `std::pair` (`<utility>`)
