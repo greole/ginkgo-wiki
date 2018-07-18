@@ -9,7 +9,8 @@ Resources
 * If you're interested in how RTTI works, there's an informal description, with links to formal documents [here](Information-about-RTTI-(RunTime-Type-Information)).
 * A funny slideshow on how to [write good commit messages](https://www.slideshare.net/TarinGamberini/commit-messages-goodpractices). Most of the tools are designed around these conventions, so it will make all our lives a bit easier if everyone follows that. If you don't like cats, you can read [this](https://gist.github.com/robertpainsi/b632364184e70900af4ab688decf6f53) instead (but feel free to read both).
 * If by any chance you're still not using `BasicLinOp`, [here](Updating-linear-operators-to-use-BasicLinOp---instead-of-LinOp) is how you can convert your `LinOp`-based matrix/solver/preconditioner/whatever and simplify your life.
-* A (draft of) template metaprogramming tutorial is [here](Template-metaprogramming-tutorial)
+* A tutorial about template metaprogramming can be found [here](./Introduction-to-Template-Metaprogramming)
+
 ### Lvalue vs Rvalue References, Move Semantics and Perfect Forwarding
 If you are interested in these topics, you should start by reading [Thomas Becker's article on the subject](http://thbecker.net/articles/rvalue_references/section_01.html) in 11 sections which introduce you to all of these subjects. Sections 4, 5 and 9 are important for efficient use of these concepts (you could make your code very inefficient otherwise).
 
