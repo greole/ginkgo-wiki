@@ -1,3 +1,5 @@
+Previous: [The Basics](./Introduction-to-Template-Metaprogramming:-The-Basics); Next: [Explicit Specialization](./Introduction-to-Template-Metaprogramming:-Explicit-Specialization)
+
 Let us take a closer look at type templates. For example:
 
 ```c++
@@ -267,3 +269,5 @@ static_assert(false_type::value == false, "");
 
 `integral_constant` can also be used to "typify" a value (i.e. use a type to
 encode a value) - more on that later.
+
+Previous: [The Basics](./Introduction-to-Template-Metaprogramming:-The-Basics); Next: [Explicit Specialization](./Introduction-to-Template-Metaprogramming:-Explicit-Specialization)
