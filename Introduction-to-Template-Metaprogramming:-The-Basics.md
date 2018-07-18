@@ -1,3 +1,5 @@
+Previous: [Introduction](./Introduction-to-Template-Metaprogramming); Next: [Metafunctions](./Introduction-to-Template-Metaprogramming:-Metafunctions)
+
 Assume a maximum of two integers, as well as two floating point numbers is
 needed in a larger application One could write the following functions to
 compute the maximums:
@@ -591,3 +593,5 @@ struct operation_result {
     // ...
 };
 ```
+
+Previous: [Introduction](./Introduction-to-Template-Metaprogramming); Next: [Metafunctions](./Introduction-to-Template-Metaprogramming:-Metafunctions)
