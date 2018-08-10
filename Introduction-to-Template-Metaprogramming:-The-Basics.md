@@ -594,4 +594,6 @@ struct operation_result {
 };
 ```
 
+Question: What is the purpose of the `rest_of_code` function 
+
 Previous: [Introduction](./Introduction-to-Template-Metaprogramming); Next: [Metafunctions](./Introduction-to-Template-Metaprogramming:-Metafunctions)
