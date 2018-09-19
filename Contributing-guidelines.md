@@ -133,7 +133,8 @@ In general, all include statements should be present on the top of the file, ord
 
 1. Related header file (e.g. `core/foo/bar.hpp` included in `core/foo/bar.cpp`, or in the unit test`core/test/foo/bar.cpp`)
 2. Standard library headers (e.g. `vector`)
-3. Third-party library headers (e.g. `omp.h`)
+3. System third-party library headers (e.g. `omp.h`)
+4. Local third-party library headers
 4. Other Ginkgo headers
 
 _Example_: A file `core/base/my_file.cpp` might have an include list like this:
@@ -141,12 +142,13 @@ _Example_: A file `core/base/my_file.cpp` might have an include list like this:
 ```c++
 #include "core/base/my_file.hpp"
 
-#include <omp.h>
-
 
 #include <algorithm>
 #include <vector>
 #include <tuple>
+
+
+#include <omp.h>
 
 
 #include "third_party/blas/cblas.hpp"
