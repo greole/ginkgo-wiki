@@ -196,6 +196,14 @@ Make use of `@internal` doxygen tag. This can be used for any comment which is n
 The documentation tags which use an additional name should be followed by two spaces in order to better distinguish the text from the doxygen tag. It is also possible to use a line break instead.
 
 
+Other programming comments
+==========================
+
+`std::cout` and other standard stream objects
+---------------------------------------------
+These objects are global objects and therefore will be the exact same object when accessed inside the same translation unit. Therefore, whenever the state or formatting of this object is changed (using `std::hex` or floating point formatting for example), make sure to put back the stream object in its original state. This is extremely important for header files.
+
+
 Project structure
 =================
 
