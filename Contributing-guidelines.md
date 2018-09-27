@@ -201,7 +201,7 @@ Other programming comments
 
 `std::cout` and other standard stream objects
 ---------------------------------------------
-These objects are global objects and therefore will be the exact same object when accessed inside the same translation unit. Therefore, whenever the state or formatting of this object is changed (using `std::hex` or floating point formatting for example), make sure to put back the stream object in its original state. This is extremely important for header files.
+These are global objects and are shared inside the same translation unit. Therefore, whenever its state or formatting is changed (e.g. using `std::hex` or floating point formatting) inside library code, make sure to restore the state before returning the control to the user. See this [stackoverflow question](https://stackoverflow.com/questions/2273330/restore-the-state-of-stdcout-after-manipulating-it) for examples on how to do it correctly. This is extremely important for header files.
 
 
 Project structure
