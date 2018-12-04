@@ -15,11 +15,11 @@ The range depends on the number of exponent bits `e`.
 ### Table of useful properties
 
 <table>
-  <tr><th>name<th>e<th>s<th>R2N round-off<th>R2Z round-off
-  <tr><td>double<td>11<td>52<td><strong>1.11e-16</strong><td>2.22e-16
-  <tr><td><td>11<td>20<td>4.77e-7<td><strong>9.54e-7</strong>
-  <tr><td><td>11<td>4<td>0.03125<td><strong>0.0625</strong>
-  <tr><td>single<td>8<td>23<td><strong>5.96e-8</strong><td>1.19e-7
-  <tr><td><td>8<td>7<td>0.00391<td><strong>0.0078125</strong>
-  <tr><td>half<td>7<td>10<td><strong>0.00048828125</strong><td>0.0009765625
+  <tr><th>name<th>e<th>s<th>R2N round-off (#digits)<th>R2Z round-off (#digits)
+  <tr><td>double<td>11<td>52<td><strong>1.11e-16 (15.95)</strong><td>2.22e-16 (15.65)
+  <tr><td><td>11<td>20<td>4.77e-7 (6.32)<td><strong>9.54e-7 (6.02)</strong>
+  <tr><td><td>11<td>4<td>0.03125 (1.51)<td><strong>0.0625 (1.20)</strong>
+  <tr><td>single<td>8<td>23<td><strong>5.96e-8 (7.22)</strong><td>1.19e-7 (6.92)
+  <tr><td><td>8<td>7<td>0.00391 (2.41)<td><strong>0.0078125 (2.11)</strong>
+  <tr><td>half<td>7<td>10<td><strong>0.00048828125 (3.31)</strong><td>0.0009765625 (3.01)
 </table>
