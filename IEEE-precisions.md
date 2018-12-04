@@ -12,7 +12,7 @@ The error introduced depends on the number of bits used for the significand `s`,
 The range depends on the number of exponent bits `e`.
 
 
-### Table of useful types
+### Table of useful properties
 
 <table>
   <tr><th>name<th>e<th>s<th>R2N round-off<th>R2Z round-off
