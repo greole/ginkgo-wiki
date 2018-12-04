@@ -21,5 +21,5 @@ The range depends on the number of exponent bits `e`.
   <tr><td><td>11<td>4<td>0.03125 (1.51)<td><strong>0.0625 (1.20)</strong>
   <tr><td>single<td>8<td>23<td><strong>5.96e-8 (7.22)</strong><td>1.19e-7 (6.92)
   <tr><td><td>8<td>7<td>0.00391 (2.41)<td><strong>0.0078125 (2.11)</strong>
-  <tr><td>half<td>7<td>10<td><strong>0.00048828125 (3.31)</strong><td>0.0009765625 (3.01)
+  <tr><td>half<td>5<td>10<td><strong>0.00048828125 (3.31)</strong><td>0.0009765625 (3.01)
 </table>
