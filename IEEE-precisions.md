@@ -14,7 +14,7 @@ The range depends on the number of exponent bits **e**. The bits encode an unsig
 
 **max(e, s) = 2<sup>2<sup>e-1</sup> - 1</sup> * 1.1...1 = 2<sup>2<sup>e-1</sup> - 1</sup> * (2 - 2<sup>-s</sup>)**
 
-The smallest value is reached for **u = 1**, so **u - bias = 1 - 2<sup>e-1</sup> + 1 = -(2<sup>e-1</sup> - 2)**. Thus, the smallest (normalized) representable value is reached for:
+The smallest exponent is reached for **u = 1**, so **u - bias = 1 - 2<sup>e-1</sup> + 1 = -(2<sup>e-1</sup> - 2)**. Thus, the smallest (normalized) representable value is reached for:
 
 **min(e, s) = 2<sup>-(2<sup>e-1</sup> - 2)</sup> * 1.0...0 = 2<sup>-(2<sup>e-1</sup> - 2)</sup>**
 
