@@ -6,6 +6,7 @@ What to check
 3. Make sure that the public interface is documented with Doxygen comments.
 4. Check that none of the script configurations have been modified (`.gitlab-ci.yml`, `.clang-format`, `.gitignore`), unless there was a good reason for it (that reason should be a part of the MR description).
 5. Go over the code and point out any design issues, hard-to-understand methods, etc.
+6. Make sure that all new features are adequately covered by unit tests
 
 How to run the CI
 -----------------
