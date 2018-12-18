@@ -4,9 +4,9 @@ What to check
 1. Verify that the PR does something meaningful, and that it actually does what the description says it does.
 2. Make sure the code style conforms to [Contributing Guidelines](Contributing-guidelines).
 3. Make sure that the public interface is documented with Doxygen comments.
-4. Check that none of the script configurations have been modified (`.gitlab-ci.yml`, `.clang-format`, `.gitignore`), unless there was a good reason for it (that reason should be a part of the MR description).
+4. Check that none of the configuration scripts have been modified (`.gitlab-ci.yml`, `.clang-format`, `.gitignore`), unless there was a good reason for it (that reason should be a part of the PR description).
 5. Go over the code and point out any design issues, hard-to-understand methods, etc.
-6. Make sure that all new features are adequately covered by unit tests
+6. Make sure that all new features are adequately covered by unit tests.
 
 How to run the CI
 -----------------
