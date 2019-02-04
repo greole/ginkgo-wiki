@@ -135,12 +135,13 @@ In general, all include statements should be present on the top of the file, ord
 2. Standard library headers (e.g. `vector`)
 3. System third-party library headers (e.g. `omp.h`)
 4. Local third-party library headers
-4. Other Ginkgo headers
+5. Public Ginkgo headers
+6. Private Ginkgo headers
 
 _Example_: A file `core/base/my_file.cpp` might have an include list like this:
 
 ```c++
-#include "core/base/my_file.hpp"
+#include <ginkgo/core/base/my_file.hpp>
 
 
 #include <algorithm>
@@ -155,9 +156,12 @@ _Example_: A file `core/base/my_file.cpp` might have an include list like this:
 #include "third_party/lapack/lapack.hpp"
 
 
-#include "core/base/executor.hpp"
-#include "core/base/lin_op.hpp"
-#include "core/base/types.hpp"
+#include <ginkgo/core/base/executor.hpp>
+#include <ginkgo/core/base/lin_op.hpp>
+#include <ginkgo/core/base/types.hpp>
+
+
+#include "core/base/my_file_kernels.hpp"
 ```
 
 _Note_: ClangFormat will take care of sorting the includes alphabetically in each group.
