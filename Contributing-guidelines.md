@@ -32,7 +32,7 @@ __TODO__: Finish this section.
 
 ### Macros
 
-C++ macros (both object-like and function-like macros) use `CAPITAL_CASE`. If they are defined in a header file, they have to start with `GKO_` to avoid name clashes (even if they are `#undef`-ed in the same file!).
+C++ macros (both object-like and function-like macros) use `CAPITAL_CASE`. They have to start with `GKO_` to avoid name clashes (even if they are `#undef`-ed in the same file!).
 
 ### Variables
 
@@ -185,6 +185,18 @@ pointer<int> x, y;  // both x and y are pointers
 ```
 
 For this reason, __always__ declare each variable on a separate line, with its own _type-specifier_.
+
+CMake coding style
+------------------
+
+### Whitespaces
+All alignment in CMake files should use four spaces.
+
+### Use of macros vs functions
+Macros in CMake do not have a scope. This means that any variable set in this macro will be available to the whole project. In contrast, functions in CMake have local scope and therefore all set variables are local only. In general, wrap all piece of algorithms using temporary variables in a function and use macros to propagate variables to the whole project.
+
+### Naming style
+All Ginkgo specific variables should be prefixed with a `GINKGO_` and all functions by `ginkgo_`.
 
 Documentation style
 -------------------
