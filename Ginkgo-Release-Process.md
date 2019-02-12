@@ -19,6 +19,13 @@ We currently have the tag "bug" in order to track bugs present in Ginkgo. The fo
 
 Before releasing, it is important to deal with bugs is some way. The first obvious way is to fix them before releasing if that is possible. This depends on the time constraints and the complexity of the bug. If the bug cannot be fixed in time for the release, then add to the [Known Issues page](https://github.com/ginkgo-project/ginkgo/wiki/Known-Issues) the existing bugs that we know of. It can be as simple as a link to the relating issue but could also take a sentence for context and severity.
 
+### Consider creating a release branch
+When a lot of activity is happening in the develop branch, it is possible to use [the Gitflow Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) to prepare the release. The document itself describes the precise process, here is a summary of why it is useful and what it does.
+
+The Gitflow Workflow defines a strict branching model designed around the project release. What it does is that it added specific roles to different branches and defines how and when they should interact.
+
+The base concept is to create a specific release branch, such as `release/1.0.0` where the release can be stabilized, all important pull requests and fixes can be integrated and the release specific tests can be made. Once all of this process is done, the release branch can be integrated into master and the release can be started from the master branch.
+
 ### Check the quality of the release's memory access
 We have support for calling our test suite with the `valgrind` tool thanks to CMake. It is important to check that there is no major memory access issues before releasing. Failing to do so may cause severe problems for our users.
 
