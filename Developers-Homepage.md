@@ -6,6 +6,7 @@ Resources
 * A mandatory read for all new developers / contributors: [Contributing guidelines](Contributing-guidelines), still under construction (but you should read it anyway - and help completing it).
 * A document describing the general design of Ginkgo: [Library design](Library-design). If you're not sure how something in Ginkgo works, or why something was done in a certain way, start here. If there's no answer in the document, feel free to ask. Once you've found your answer (either by asking, or by looking at the code in more detail), we encourage you to update the document with what you've found.
 * A guide for reviewing pull requests can be found [here](Instructions-for-pull-request-(PR)-reviewers).
+* A guide for creating a new Ginkgo release can be found [here](https://github.com/ginkgo-project/ginkgo/wiki/Ginkgo-Release-Process).
 * If you're interested in how RTTI works, there's an informal description, with links to formal documents [here](Information-about-RTTI-(RunTime-Type-Information)).
 * A funny slideshow on how to [write good commit messages](https://www.slideshare.net/TarinGamberini/commit-messages-goodpractices). Most of the tools are designed around these conventions, so it will make all our lives a bit easier if everyone follows that. If you don't like cats, you can read [this](https://gist.github.com/robertpainsi/b632364184e70900af4ab688decf6f53) instead (but feel free to read both).
 * A tutorial about template metaprogramming can be found [here](./Introduction-to-Template-Metaprogramming).
