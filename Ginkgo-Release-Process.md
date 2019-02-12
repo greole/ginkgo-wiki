@@ -1,5 +1,11 @@
 The purpose of this page is to elaborate a safe procedure for releasing Ginkgo code. The aim is to cover important topics for releasing the code and ensuring there is less mistakes when going through this process by following a sort of checklist we could come up with.
 
+This page contains the following steps:
+1. [Preliminary procedures](#preliminary-procedures)
+2. [Building binaries using CPack](#building-binaries-using-cpack)
+3. [Publishing the Release](#publishing-the-release)
+4. [Post-releasing process](#post-releasing-process)
+
 Preliminary procedures
 ----------------------
 This is highly recommended to ensure a good quality of the Ginkgo releases.
