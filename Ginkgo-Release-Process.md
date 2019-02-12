@@ -60,13 +60,11 @@ cmake  -G "Unix Makefiles" -H. -BRelease -DCMAKE_BUILD_TYPE=Release -DGINKGO_DEV
 cmake  -G "Unix Makefiles" -H. -BDebug -DCMAKE_BUILD_TYPE=Debug -DGINKGO_DEVEL_TOOLS=ON \
       -DGINKGO_BUILD_TESTS=ON -DGINKGO_BUILD_REFERENCE=ON -DGINKGO_BUILD_OMP=ON \
       -DGINKGO_BUILD_CUDA=ON
-cmake --build Release -j <nprocs>
-cmake --build Debug -j <nprocs>
 pushd Release
-ctest -T test -T submit
+ctest -T build -T test -T submit
 popd
 pushd Debug
-ctest -T test -T submit
+ctest -T build -T test -T submit
 popd
 cpack -G TGZ,ZIP,<other formats>
 ```
