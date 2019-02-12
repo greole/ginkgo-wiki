@@ -92,7 +92,7 @@ cpack -G TGZ,ZIP,<other formats>
 
 Publishing the Release
 ----------------------
-Once the release milestone is complete, all tests pass properly, important bugs are fixed or listed as known issues, the memory checks are correct and the release notes are ready, the actual release can finally be published. The first step before starting the process is, by using the [semantic versioning guidelines](https://semver.org/), to decide on the new version's number, which is of the form `MAJOR.MINOR.PATCH`. When the number is decided, it is necessary to update our main `.gitlab-ci.yml` file to add to the gh-pages entry the tag version under `only: tags`, for more information see [this section](Documentation and website update).
+Once the release milestone is complete, all tests pass properly, important bugs are fixed or listed as known issues, the memory checks are correct and the release notes are ready, the actual release can finally be published. The first step before starting the process is, by using the [semantic versioning guidelines](https://semver.org/), to decide on the new version's number, which is of the form `MAJOR.MINOR.PATCH`. When the number is decided, it is necessary to update our main `.gitlab-ci.yml` file to add to the gh-pages entry the tag version under `only: tags`, for more information see [this section](#documentation-and-website-update).
 
 This process is made easy thanks to the respective [Github](https://help.github.com/articles/creating-releases/) and [Gitlab](https://docs.gitlab.com/ee/workflow/releases.html) release processes. Both processes work similarly. In general, we should be using only the Github one because our Gitlab page is private, except for a mirror.
 
