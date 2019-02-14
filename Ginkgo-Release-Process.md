@@ -153,4 +153,4 @@ gh-pages:
       - schedules
 ```
 
-Once the tag is present, a [new pipeline](https://gitlab.com/ginkgo-project/ginkgo-public-ci/pipelines) can be invoked for the tagged version. This should generate the documentation for the release in the form: https://ginkgo-project.github.io/ginkgo/doc/<version>.
+Once the tag is present, a [new pipeline](https://gitlab.com/ginkgo-project/ginkgo-public-ci/pipelines) can be invoked for the tagged version. This should generate the documentation for the release in the form: `https://ginkgo-project.github.io/ginkgo/doc/<version>`.
