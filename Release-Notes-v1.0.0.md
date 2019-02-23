@@ -97,7 +97,12 @@ Preconditioners can be effective at improving the convergence rate of Krylov met
 
 You can use the block-Jacobi preconditioner with system matrices stored in any of the built-in matrix formats and any custom format that has a defined conversion into a CSR matrix.
 
-Any linear operator (matrix, solver, preoconditioner) can be combined to 
+Any linear operator (matrix, solver, preconditioner) can be combined into complex operators by using the following utilities:
+
+* `gko::Combination` - creates a linear combination **&alpha;<sub>1</sub> A<sub>1</sub> + ... + &alpha;<sub>n</sub> A<sub>n</sub>** of linear operators;
+* `gko::Composition` - creates a composition **A<sub>1</sub> ... A<sub>n</sub>** of linear operators.
+
+You can utilize these utilities (together with a solvers which represent the inversion operation) to compute complex expressions, such as **x = (3A - B<sup>-1</sup>C)<sup>-1</sup>b**.
 
 As described in the "Designed for HPC" section, you have a choice between 3 different executors:
 
@@ -148,7 +153,7 @@ You can also check out Ginkgo's [core](https://github.com/ginkgo-project/ginkgo/
 
 If you want to use your own functionality with Ginkgo, these examples are the best way to start:
 
-* `custom_logger` demonstrates how Ginkgo's logging API can be leveraged to implement application-specific callbacks for Ginkgo's events. (__TODO:__ We do not have this yet? We need this example ASAP, it's the most basic way of extending Ginkgo, and should definitely be the first thing people look at when trying to add custom functionality.)
+* `custom_logger` demonstrates how Ginkgo's logging API can be leveraged to implement application-specific callbacks for Ginkgo's events. (__TODO:__ We do not have this yet? We need this example ASAP, it's the most basic way of extending Ginkgo, and should definitely be the first thing people look at when trying to add custom functionality. E.g. we could have one that writes out a table of real vs recurrent residuals.)
 * [`asynchronous_stopping_criterion`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/asynchronous_stopping_criterion) creates a custom stopping criterion that controls when the solver is stopped from another execution thread.
 * [`custom_matrix_format`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/custom_matrix_format) demonstrates how new linear operators can be created, by modifying the `poisson_solver` example to use a more efficient matrix format designed specifically for this application.
 
@@ -161,7 +166,7 @@ Our principal goal for the development of Ginkgo is to provide high quality soft
 
 Thus, if you are interested in making this project even better, we would love to hear from you:
 
-* If you have any questions, comments, suggestions, problems, or think you have found a bug, do not hesitate to post an [issue](https://github.com/ginkgo-project/ginkgo/issues/new) (you will have to register on GitHub first to be able to do it). In case you _really_ do not want your comment to be publicly available, you can send us an e-mail to ginkgo.library@gmail.com.
+* If you have any questions, comments, suggestions, problems, or think you have found a bug, do not hesitate to [post an issue](https://github.com/ginkgo-project/ginkgo/issues/new) (you will have to register on GitHub first to be able to do it). In case you _really_ do not want your comment to be publicly available, you can send us an e-mail to ginkgo.library@gmail.com.
 * If you developed, or would like to develop your own component that you think could be useful to others, we would be glad to accept a [pull request](https://github.com/ginkgo-project/ginkgo/pulls) and distribute your component as part of Ginkgo. The community will benefit by having the new method easily available, and you would get the chance to improve your code further as part of the review process with our development team. You may also want to consider creating writing an issue or sending an e-mail about the feature you are trying to implement before you get started for tips on how to best realize it in Ginkgo, and avoid going the wrong way.
 * If you just like Ginkgo and want to help, but do not have a specific project in mind, fell free to take on one of the [open issues](https://github.com/ginkgo-project/ginkgo/issues), or send us an issue or an e-mail describing your interests and background and we will find a project you could work on.
 
