@@ -170,6 +170,13 @@ Thus, if you are interested in making this project even better, we would love to
 * If you developed, or would like to develop your own component that you think could be useful to others, we would be glad to accept a [pull request](https://github.com/ginkgo-project/ginkgo/pulls) and distribute your component as part of Ginkgo. The community will benefit by having the new method easily available, and you would get the chance to improve your code further as part of the review process with our development team. You may also want to consider creating writing an issue or sending an e-mail about the feature you are trying to implement before you get started for tips on how to best realize it in Ginkgo, and avoid going the wrong way.
 * If you just like Ginkgo and want to help, but do not have a specific project in mind, fell free to take on one of the [open issues](https://github.com/ginkgo-project/ginkgo/issues), or send us an issue or an e-mail describing your interests and background and we will find a project you could work on.
 
+Backward Compatibility Guarantee and Future Support
+---------------------------------------------------
+
+This is a major **1.0.0** release of Ginkgo. All future patch releases of the form **1.0.x** are guaranteed to keep exactly the same interface as the major release. All minor releases of the form **1.x.y** are guaranteed not to change existing interfaces, but only add new capabilities.
+
+Thus, all code conforming to the **1.0.0** release will continue to compile and run on all future Ginkgo versions up to (but not including) version **2.0.0**.
+
 About
 -----
 
