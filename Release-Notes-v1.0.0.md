@@ -126,6 +126,11 @@ Extensibility
 If you did not find what you need among the built-in components, you can try adding your own implementation of a component. New matrices, solvers and preconditioners can be implemented by inheriting from the `gko::LinOp`
 abstract class, while new stopping criteria and loggers by inheriting from the `gko::stop::Criterion` and `gko::log::Logger` abstract classes, respectively. Ginkgo aims at being developer-friendly and provides features that simplify the development of new components. To help handling various memory spaces, there is the `gko::Array` type template that encapsulates memory allocations, deallocations and copies between them. Macros and [mixins](https://en.wikipedia.org/wiki/Mixin) (realized via the [C++ CRTP idiom](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern)) that implement common utilities on Ginkgo's object are also provided, allowing you to focus on the implementation of your algorithm, instead of implementing various utilities required by the interface.
 
+License
+-------
+
+Ginkgo is available under the [BSD 3-clause license](https://github.com/ginkgo-project/ginkgo/blob/develop/LICENSE). Optional third-party tools and libraries needed to run the unit tests, benchmarks, and developer tools are available under their own open-source licences, but a fully functional installation of Ginkgo can be obtained without any of them. Check [ABOUT-LICENSING.md](https://github.com/ginkgo-project/ginkgo/blob/develop/ABOUT-LICENSING.md) for details.
+
 Getting Started
 ---------------
 
@@ -148,3 +153,14 @@ If you want to use your own functionality with Ginkgo, these examples are the be
 * [`custom_matrix_format`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/custom_matrix_format) demonstrates how new linear operators can be created, by modifying the `poisson_solver` example to use a more efficient matrix format designed specifically for this application.
 
 Ginkgo's [sources](https://github.com/ginkgo-project/ginkgo) can also serve as a good example, since built-in components are mostly implemented using publicly available utilities.
+
+Contributing
+------------
+
+Our principal goal for the development of Ginkgo is to provide high quality software to researchers in HPC, and to application scientists that are interested in using this software. We believe that by investing more effort in the initial development of production-ready method, the entire scientific community benefits in the long run. HPC researchers can save time by using Ginkgo's components as a starting point for their algorithms, or to compare Ginkgo's implementations with their own methods. Since Ginkgo is used for bleeding-edge research, application scientists immediately get access to production-ready new methods that help solve their problems more efficiently.
+
+Thus, if you are interested in making this project even better, we would love to hear from you:
+
+* If you have any questions, comments, suggestions, problems, or think you have found a bug, do not hesitate to post an [issue](https://github.com/ginkgo-project/ginkgo/issues/new) (you will have to register on GitHub first to be able to do it). In case you _really_ do not want your comment to be publicly available, you can send us an e-mail to ginkgo.library@gmail.com.
+* If you developed, or would like to develop your own component that you think could be useful to others, we would be glad to accept a [pull request](https://github.com/ginkgo-project/ginkgo/pulls) and distribute your component as part of Ginkgo. The community will benefit by having the new method easily available, and you would get the chance to improve your code further as part of the review process with our development team. You may also want to consider creating writing an issue or sending an e-mail about the feature you are trying to implement before you get started for tips on how to best realize it in Ginkgo, and avoid going the wrong way.
+* If you just like Ginkgo and want to help, but do not have a specific project in mind, fell free to take on one of the [open issues](https://github.com/ginkgo-project/ginkgo/issues), or send us an issue or an e-mail describing your interests and background and we will find a project you could work on.
