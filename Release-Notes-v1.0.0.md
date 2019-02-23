@@ -1,5 +1,5 @@
-![Ginkgo](https://github.com/ginkgo-project/ginkgo/raw/develop/assets/logo.png)
-===============================================================================
+![Ginkgo](https://github.com/ginkgo-project/ginkgo/raw/develop/assets/logo.png) &nbsp;&nbsp; 1.0.0
+==================================================================================================
 
 The Ginkgo team is proud to announce the first release of Ginkgo, the next-generation high-performance on-node sparse linear algebra library. Ginkgo leverages the features of modern C++ to give you a tool for the iterative solution of linear systems that is:
 
@@ -63,4 +63,58 @@ Memory Management
 -----------------
 
 As a result of its executor-based design and high level abstractions, Ginkgo has explicit information about the location of every piece of data it needs and can automatically allocate, free and move the data where it is needed. However, lazily moving data around is often not optimal, and determining when a piece of data should be copied or shared in general cannot be done automatically. For this reason, Ginkgo also gives explicit control of sharing and moving its objects to the user via the dedicated ownership commands: `gko::clone`, `gko::share`, `gko::give` and `gko::lend`. If you are interested in a detailed description of the problems the C++ standard has with these concepts check out [this Ginkgo Wiki page](https://github.com/ginkgo-project/ginkgo/wiki/Library-design#use-of-pointers), and for more details about Ginkgo's solution to the problem and the description of ownership commands take a look at [this issue](https://github.com/ginkgo-project/ginkgo/issues/30).
+
+Components
+----------
+
+Instead of providing a single method to solve a linear system, Ginkgo provides a selection of components that can be used to tailor the solver to your specific problem. It is also possible to use each component separately, as part of larger software. The provided components include matrix formats, solvers and preconditioners (commonly referred to as "_linear operators_" in Ginkgo), as well as executors, stopping criteria and loggers.
+
+Matrix formats are used to represent the system matrix and the vectors of the system. The following are the supported matrix formats (__TODO:__ maybe add links, or better descriptions of the formats):
+
+* `gko::matrix::Dense` - the row-major storage dense matrix format;
+* `gko::matrix::Csr` - the Compressed Sparse Row (CSR) sparse matrix format;
+* `gko::matrix::Coo` - the Coordinate (COO) sparse matrix format;
+* `gko::matrix::Ell` - the ELLPACK (ELL_ sparse matrix format;
+* `gko::matrix::Sellp` - the SELL-P sparse matrix format based on the sliced ELLPACK representation;
+* `gko::matrix::Hybrid` - the hybrid matrix format that represents a matrix as a sum of an ELL and COO matrix.
+
+All formats offer support for the `apply` operation that performs a (sparse) matrix-vector product between the matrix and one or multiple vectors. Conversion routines between the formats are also provided. `gko::matrix::Dense` offers an extended interface that includes simple vector operations such as addition, scaling, dot product and norm, which are applied on each column of the matrix separately.
+The interface for all operations is designed to allow any type of matrix format as a parameter. However, version 1.0.0 of this library supports only instances of `gko::matrix::Dense` as vector arguments (the matrix arguments do not have any limitations).
+
+Solvers are utilized to solve the system with a given system matrix and right hand side. Currently, you can choose from several high-performance Krylov methods implemented in Ginkgo:
+
+* `gko::solver::Cg` - the Conjugate Gradient method (CG) suitable for symmetric positive definite problems;
+* `gko::solver::Fcg` - the flexible variant of Conjugate Gradient (FCG) that supports non-constant preconditioners;
+* `gko::solver::Cgs` - the Conjuage Gradient Squared method (CGS) for general problems;
+* `gko::solver::Bicgstab` - the BiConjugate Gradient Stabilized method (BiCGSTAB) for general probles;
+* `gko::solver::Gmres` - the restarted Generalized Minimal Residual method (GMRES) for general problems.
+
+All solvers work with system matrices stored in any of the matrix formats described above, and any other general _linear operator_, such as combinations and compositions of other operators, or any matrix format you defined specifically for your application.
+
+Preconditioners can be effective at improving the convergence rate of Krylov methods. All solvers listed above are implemented with preconditioning support. This version of Ginkgo has support for one preconditioner type, but stay tuned, as more preconditioners are coming in future releases:
+
+* `gko::preconditioner::Jacobi` - a highly optimized version of the block-Jacobi preconditioner (block-diagonal scaling), optionally enhanced with adaptive precision storage scheme for additional performance gains.
+
+You can use the block-Jacobi preconditioner with system matrices stored in any of the built-in matrix formats and any custom format that has a defined conversion into a CSR matrix.
+
+As described in the "Designed for HPC" section, you have a choice between 3 different executors:
+
+* `gko::CudaExecutor` - offers a highly optimized GPU implementation tailored for recent HPC systems;
+* `gko::ReferenceExecutor` - single-threaded reference implementation for easy development and testing on systems without a GPU;
+* `gko::OmpExecutor` - preliminary OpenMP-based implementation for CPUs.
+
+With Ginkgo, you have fine control over the solver iteration process to ensure that you obtain your solution under the time and accuracy constraints of your application. Ginkgo supports the following stopping criteria out of the box:
+
+* `gko::stop::Iteration` - the iteration process is stopped once the specified iteration count is reached;
+* `gko::stop::ResidualNormReduction` - the iteration process is stopped once the initial residual norm is reduced by the specified factor;
+* `gko::stop::Time` - the iteration process is stopped if the specified time limit is reached.
+
+You can combine multiple criteria to achieve the desired result, and even add your own criteria to the mix.
+
+Ginkgo also allows you to keep track of the events that happen while using the library, by providing hooks to those events via the `gko::log::Logger` abstraction. These hooks include everything from low-level events, such as memory allocations, deallocations, copies and kernel launches, up to high-level events, such as linear operator applications and completions of solver iterations. While the true power of logging is enabled by writing application-specific loggers, Ginkgo does provide several built-in solutions that can be useful for debugging and profiling:
+
+* `gko::log::Convergence` - allows access to the final iteration count and residual of a Krylov solver;
+* `gko::log::Stream` - prints events in human-readable format to the given output stream as they are emitted;
+* `gko::log::Record` - saves all emitted events in a data structure for subsequent processing;
+* `gko::log::Papi` - converts between Ginkgo's logging hooks and the standard PAPI Software Defined Events (SDE) interface (note that some details are lost, as PAPI can represent only a subset of data Ginkgo's logging can provide).
 
