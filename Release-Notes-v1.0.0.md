@@ -164,3 +164,35 @@ Thus, if you are interested in making this project even better, we would love to
 * If you have any questions, comments, suggestions, problems, or think you have found a bug, do not hesitate to post an [issue](https://github.com/ginkgo-project/ginkgo/issues/new) (you will have to register on GitHub first to be able to do it). In case you _really_ do not want your comment to be publicly available, you can send us an e-mail to ginkgo.library@gmail.com.
 * If you developed, or would like to develop your own component that you think could be useful to others, we would be glad to accept a [pull request](https://github.com/ginkgo-project/ginkgo/pulls) and distribute your component as part of Ginkgo. The community will benefit by having the new method easily available, and you would get the chance to improve your code further as part of the review process with our development team. You may also want to consider creating writing an issue or sending an e-mail about the feature you are trying to implement before you get started for tips on how to best realize it in Ginkgo, and avoid going the wrong way.
 * If you just like Ginkgo and want to help, but do not have a specific project in mind, fell free to take on one of the [open issues](https://github.com/ginkgo-project/ginkgo/issues), or send us an issue or an e-mail describing your interests and background and we will find a project you could work on.
+
+About
+-----
+
+Ginkgo 1.0.0 is brought to you by (__TODO:__ maybe add logos here):
+
+Karlsruhe Institute of Technology, Germany;  
+Universitat Jaume I, Spain; and  
+The University of Tennessee, Knoxville, US.  
+
+These universities, along with various project grants, supported the development team and provided resources needed for the development of Ginkgo.
+
+Ginkgo 1.0.0 contains contributions from:
+
+Hartwig Anzt, Karlsruhe Institute of Technology  
+Yenchen Chen, National Taiwan University  
+Terry Cojean, Karlsruhe Institute of Technology  
+Goran Flegar, Universitat Jaume I  
+Fritz Göbel, Karlsruhe Institute of Technology  
+Thomas Grützmacher, Karlsruhe Institute of Technology  
+Pratik Nayak, Karlsruhe Institue of Technologgy  
+Tobias Ribizel, Karlsruhe Institute of Technology  
+Yuhsiang Tsai, National Taiwan University  
+
+The development team is grateful to the following individuals for discussions and comments:
+ 
+Erik Boman  
+Jelena Držaić  
+Mike Heroux  
+Mark Hoemmen  
+Timo Heister    
+Jens Saak  
