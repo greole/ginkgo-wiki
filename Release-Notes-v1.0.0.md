@@ -120,6 +120,12 @@ Ginkgo also allows you to keep track of the events that happen while using the l
 * `gko::log::Record` - saves all emitted events in a data structure for subsequent processing;
 * `gko::log::Papi` - converts between Ginkgo's logging hooks and the standard PAPI Software Defined Events (SDE) interface (note that some details are lost, as PAPI can represent only a subset of data Ginkgo's logging can provide).
 
+Extensibility
+-------------
+
+If you did not find what you need among the built-in components, you can try adding your own implementation of a component. New matrices, solvers and preconditioners can be implemented by inheriting from the `gko::LinOp`
+abstract class, while new stopping criteria and loggers by inheriting from the `gko::stop::Criterion` and `gko::log::Logger` abstract classes, respectively. Ginkgo aims at being developer-friendly and provides features that simplify the development of new components. To help handling various memory spaces, there is the `gko::Array` type template that encapsulates memory allocations, deallocations and copies between them. Macros and [mixins](https://en.wikipedia.org/wiki/Mixin) (realized via the [C++ CRTP idiom](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern)) that implement common utilities on Ginkgo's object are also provided, allowing you to focus on the implementation of your algorithm, instead of implementing various utilities required by the interface.
+
 Getting Started
 ---------------
 
@@ -133,8 +139,12 @@ To learn how to use Ginkgo, and get ideas for your own projects, take a look at 
 * [`3pt_stencil`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/3pt_stencil) is a variation of the `poisson_solver` that demonstrates how one could use Ginkgo with software that was not originally designed with Ginkgo support. It encapsulates everything related to Ginkgo in a single function that accepts raw data of the problem and demonstrates how such data can be directly used with Ginkgo's components.
 * [`inverse_iteration`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/inverse_iteration) is another full application that uses Ginkgo's solver as a component for implementing the inverse iteration eigensolver.
 
+You can also check out Ginkgo's [core](https://github.com/ginkgo-project/ginkgo/tree/develop/core/test) and [reference](https://github.com/ginkgo-project/ginkgo/tree/develop/reference/test) unit tests and [benchmarks](https://github.com/ginkgo-project/ginkgo/tree/develop/benchmark) for more detailed examples of using each of the components. A complete Doxygen-generated reference is available [online](https://ginkgo-project.github.io/ginkgo/doc/develop/), or you can find the same information by directly browsing Ginkgo's [headers](https://github.com/ginkgo-project/ginkgo/tree/develop/include/ginkgo). We are investing significant efforts in maintaining good code quality, so you should not find them difficult to read and understand.
+
 If you want to use your own functionality with Ginkgo, these examples are the best way to start:
 
 * `custom_logger` demonstrates how Ginkgo's logging API can be leveraged to implement application-specific callbacks for Ginkgo's events. (__TODO:__ We do not have this yet? We need this example ASAP, it's the most basic way of extending Ginkgo, and should definitely be the first thing people look at when trying to add custom functionality.)
 * [`asynchronous_stopping_criterion`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/asynchronous_stopping_criterion) creates a custom stopping criterion that controls when the solver is stopped from another execution thread.
 * [`custom_matrix_format`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/custom_matrix_format) demonstrates how new linear operators can be created, by modifying the `poisson_solver` example to use a more efficient matrix format designed specifically for this application.
+
+Ginkgo's [sources](https://github.com/ginkgo-project/ginkgo) can also serve as a good example, since built-in components are mostly implemented using publicly available utilities.
