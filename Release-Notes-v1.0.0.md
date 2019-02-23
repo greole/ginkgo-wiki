@@ -97,6 +97,8 @@ Preconditioners can be effective at improving the convergence rate of Krylov met
 
 You can use the block-Jacobi preconditioner with system matrices stored in any of the built-in matrix formats and any custom format that has a defined conversion into a CSR matrix.
 
+Any linear operator (matrix, solver, preoconditioner) can be combined to 
+
 As described in the "Designed for HPC" section, you have a choice between 3 different executors:
 
 * `gko::CudaExecutor` - offers a highly optimized GPU implementation tailored for recent HPC systems;
@@ -118,3 +120,21 @@ Ginkgo also allows you to keep track of the events that happen while using the l
 * `gko::log::Record` - saves all emitted events in a data structure for subsequent processing;
 * `gko::log::Papi` - converts between Ginkgo's logging hooks and the standard PAPI Software Defined Events (SDE) interface (note that some details are lost, as PAPI can represent only a subset of data Ginkgo's logging can provide).
 
+Getting Started
+---------------
+
+To learn how to use Ginkgo, and get ideas for your own projects, take a look at the following examples:
+
+* [`minimal_solver_cuda`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/minimal_solver_cuda) is probably one of the smallest complete programs you can write in Ginkgo, and can be used as a quick reference for assembling Ginkgo's components.
+* [`simple_solver`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/simple_solver) is a slightly more complex example that reads the matrices from files, computes the final residual, and selects a different executor based on the command-line parameter.
+* [`preconditioned_solver`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/preconditioned_solver) is a slightly modified `simple_solver` example that adds that demonstrates how a solver can be enhanced with a preconditioner.
+* [`simple_solver_logging`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/simple_solver_logging) is yet another modification of the `simple_solver` example that prints information about the solution process to the screen by using built-in loggers.
+* [`poisson_solver`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/poisson_solver) is a more elaborate example that builds a small application for the solution of the 1D Poisson equation using Ginkgo.
+* [`3pt_stencil`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/3pt_stencil) is a variation of the `poisson_solver` that demonstrates how one could use Ginkgo with software that was not originally designed with Ginkgo support. It encapsulates everything related to Ginkgo in a single function that accepts raw data of the problem and demonstrates how such data can be directly used with Ginkgo's components.
+* [`inverse_iteration`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/inverse_iteration) is another full application that uses Ginkgo's solver as a component for implementing the inverse iteration eigensolver.
+
+If you want to use your own functionality with Ginkgo, these examples are the best way to start:
+
+* `custom_logger` demonstrates how Ginkgo's logging API can be leveraged to implement application-specific callbacks for Ginkgo's events. (__TODO:__ We do not have this yet? We need this example ASAP, it's the most basic way of extending Ginkgo, and should definitely be the first thing people look at when trying to add custom functionality.)
+* [`asynchronous_stopping_criterion`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/asynchronous_stopping_criterion) creates a custom stopping criterion that controls when the solver is stopped from another execution thread.
+* [`custom_matrix_format`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/custom_matrix_format) demonstrates how new linear operators can be created, by modifying the `poisson_solver` example to use a more efficient matrix format designed specifically for this application.
