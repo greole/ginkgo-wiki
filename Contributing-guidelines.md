@@ -219,6 +219,9 @@ Other programming comments
 ---------------------------------------------
 These are global objects and are shared inside the same translation unit. Therefore, whenever its state or formatting is changed (e.g. using `std::hex` or floating point formatting) inside library code, make sure to restore the state before returning the control to the user. See this [stackoverflow question](https://stackoverflow.com/questions/2273330/restore-the-state-of-stdcout-after-manipulating-it) for examples on how to do it correctly. This is extremely important for header files.
 
+Warnings
+--------
+By default, the `-DGINKGO_COMPILER_FLAGS` is set to `-Wpedantic` and hence pedantic warnings are emitted by default. Some of these warnings are false positives and a complete list of the currently known warnings and their solutions is listed in #174. Specifically, when macros are being used, we have the issue of having `extra ;` warnings, which is resolved by adding a `static_assert()`. The CI system additionally also has a step where it compiles for pedantic warnings to be errors.
 
 Project structure
 =================
