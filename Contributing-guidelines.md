@@ -223,6 +223,10 @@ Warnings
 --------
 By default, the `-DGINKGO_COMPILER_FLAGS` is set to `-Wpedantic` and hence pedantic warnings are emitted by default. Some of these warnings are false positives and a complete list of the currently known warnings and their solutions is listed in #174. Specifically, when macros are being used, we have the issue of having `extra ;` warnings, which is resolved by adding a `static_assert()`. The CI system additionally also has a step where it compiles for pedantic warnings to be errors.
 
+Avoiding circular dependencies
+------------------------------
+To avoid circular dependencies, it is forbidden inside the kernel modules (`ginkgo_cuda`, `ginkgo_omp`, `ginkgo_reference`) to use functions implemented only in the `core` module (using functions implemented in the headers is fine). In practice, what this means is that it is required that any commit to Ginkgo pass the `no-circular-deps` CI step. For more details, see #278 and [this pipeline](https://gitlab.com/ginkgo-project/ginkgo-public-ci/pipelines/52941979), where Ginkgo did not abide to this policy.
+
 Project structure
 =================
 
