@@ -225,7 +225,7 @@ By default, the `-DGINKGO_COMPILER_FLAGS` is set to `-Wpedantic` and hence pedan
 
 Avoiding circular dependencies
 ------------------------------
-To avoid circular dependencies, it is forbidden inside the kernel modules (`ginkgo_cuda`, `ginkgo_omp`, `ginkgo_reference`) to use functions implemented only in the `core` module (using functions implemented in the headers is fine). In practice, what this means is that it is required that any commit to Ginkgo pass the `no-circular-deps` CI step. For more details, see [this pipeline](https://gitlab.com/ginkgo-project/ginkgo-public-ci/pipelines/52941979), where Ginkgo did not abide to this policy and [PR #278](https://github.com/ginkgo-project/ginkgo/pull/278) which fixed this.
+To avoid circular dependencies, it is forbidden inside the kernel modules (`ginkgo_cuda`, `ginkgo_omp`, `ginkgo_reference`) to use functions implemented only in the `core` module (using functions implemented in the headers is fine). In practice, what this means is that it is required that any commit to Ginkgo pass the `no-circular-deps` CI step. For more details, see [this pipeline](https://gitlab.com/ginkgo-project/ginkgo-public-ci/pipelines/52941979), where Ginkgo did not abide to this policy and [PR #278](https://github.com/ginkgo-project/ginkgo/pull/278) which fixed this. Note that doing so is not enough to guarantee with 100% accuracy that no circular dependency is present. For an example of such a case, take at look at [this pipeline](https://gitlab.com/ginkgo-project/ginkgo-public-ci/pipelines/53006772) where one of the compiler setups detected an incorrect dependency of the `cuda` module (due to jacobi) on the `core` module.
 
 Project structure
 =================
