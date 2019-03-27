@@ -1,3 +1,9 @@
+## Windows support
+Currently, Ginkgo has no official Windows support yet. In general, it is thought that static library support should be easier than shared library on Windows. If you have a Windows computer and really need support, feel free to contribute in [issue 281](https://github.com/ginkgo-project/ginkgo/issues/281). We are actively looking for people with a Windows computer to help push this issue forward.
+
+## Atomic operations for custom value types
+When using custom value types with Ginkgo (non default ones), due to atomic operations not supporting custom value types, there may be some execution problems with some kernels. For more details, see [issue 65](https://github.com/ginkgo-project/ginkgo/issues/65).
+
 ## Using an installed static library of Ginkgo with CUDA
 
 CMake currently requires to know that it needs to link against CUDA as soon as one of your dependencies require it (there will be an error about `CMAKE_CUDA_DEVICE_LINK_EXECUTABLE` not being set). At the time of writing, it is still an [open CMake issue](https://gitlab.kitware.com/cmake/cmake/issues/18614).
