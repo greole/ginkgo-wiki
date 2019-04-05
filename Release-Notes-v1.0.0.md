@@ -12,7 +12,7 @@ The Ginkgo team is proud to announce the first release of Ginkgo, the next-gener
 Ease of Use
 -----------
 
-Ginkgo uses high level abstractions to develop an efficient and understandable vocabulary for high-performance iterative solution of linear systems. As a result, the solution of a system stored in [matrix market format](https://math.nist.gov/MatrixMarket/formats.html) via a preconditioned Krylov solver on an accelerator is only [20 lines of code away](https://github.com/ginkgo-project/ginkgo/blob/develop/examples/minimal_solver_cuda/minimal_solver_cuda.cpp):
+Ginkgo uses high level abstractions to develop an efficient and understandable vocabulary for high-performance iterative solution of linear systems. As a result, the solution of a system stored in [matrix market format](https://math.nist.gov/MatrixMarket/formats.html) via a preconditioned Krylov solver on an accelerator is only [20 lines of code away](https://github.com/ginkgo-project/ginkgo/blob/develop/examples/minimal-cuda-solver/minimal-cuda-solver.cpp):
 
 ```c++
 #include <ginkgo/ginkgo.hpp>
@@ -43,9 +43,9 @@ int main()
 }
 ```
 
-Notice that Ginkgo is not a tool that generates C++. It _is_ C++. So just [install the library](https://github.com/ginkgo-project/ginkgo/blob/develop/README.md) (which is extremely simple due to its CMake-based build system), include the header and start using Ginkgo in your projects.
+Notice that Ginkgo is not a tool that generates C++. It _is_ C++. So just [install the library](https://github.com/ginkgo-project/ginkgo/blob/develop/INSTALL.md) (which is extremely simple due to its CMake-based build system), include the header and start using Ginkgo in your projects.
 
-Already have an existing application and want to use Ginkgo to implement some part of it? Check out our [integration example](https://github.com/ginkgo-project/ginkgo/blob/develop/examples/3pt_stencil/3pt_stencil.cpp#L177) for a demonstration on how Ginkgo can be used with raw data already available in the application. If your data is in one of the formats supported by Ginkgo, it may be possible to use it directly, without creating a Ginkgo-dedicated copy of it.
+Already have an existing application and want to use Ginkgo to implement some part of it? Check out our [integration example](https://github.com/ginkgo-project/ginkgo/blob/develop/examples/three-pt-stencil-solver/three-pt-stencil-solver.cpp#L144) for a demonstration on how Ginkgo can be used with raw data already available in the application. If your data is in one of the formats supported by Ginkgo, it may be possible to use it directly, without creating a Ginkgo-dedicated copy of it.
 
 Designed for HPC
 ----------------
@@ -74,7 +74,7 @@ Matrix formats are used to represent the system matrix and the vectors of the sy
 * `gko::matrix::Dense` - the row-major storage dense matrix format;
 * `gko::matrix::Csr` - the Compressed Sparse Row (CSR) sparse matrix format;
 * `gko::matrix::Coo` - the Coordinate (COO) sparse matrix format;
-* `gko::matrix::Ell` - the ELLPACK (ELL_ sparse matrix format;
+* `gko::matrix::Ell` - the ELLPACK (ELL) sparse matrix format;
 * `gko::matrix::Sellp` - the SELL-P sparse matrix format based on the sliced ELLPACK representation;
 * `gko::matrix::Hybrid` - the hybrid matrix format that represents a matrix as a sum of an ELL and COO matrix.
 
@@ -134,7 +134,7 @@ abstract class, while new stopping criteria and loggers by inheriting from the `
 License
 -------
 
-Ginkgo is available under the [BSD 3-clause license](https://github.com/ginkgo-project/ginkgo/blob/develop/LICENSE). Optional third-party tools and libraries needed to run the unit tests, benchmarks, and developer tools are available under their own open-source licences, but a fully functional installation of Ginkgo can be obtained without any of them. Check [ABOUT-LICENSING.md](https://github.com/ginkgo-project/ginkgo/blob/develop/ABOUT-LICENSING.md) for details.
+Ginkgo is available under the [BSD 3-clause license](https://github.com/ginkgo-project/ginkgo/blob/develop/LICENSE). Optional third-party tools and libraries needed to run the unit tests, benchmarks, and developer tools are available under their own open-source licenses, but a fully functional installation of Ginkgo can be obtained without any of them. Check [ABOUT-LICENSING.md](https://github.com/ginkgo-project/ginkgo/blob/develop/ABOUT-LICENSING.md) for details.
 
 Getting Started
 ---------------
