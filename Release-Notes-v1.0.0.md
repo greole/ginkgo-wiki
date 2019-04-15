@@ -69,7 +69,7 @@ Components
 
 Instead of providing a single method to solve a linear system, Ginkgo provides a selection of components that can be used to tailor the solver to your specific problem. It is also possible to use each component separately, as part of larger software. The provided components include matrix formats, solvers and preconditioners (commonly referred to as "_linear operators_" in Ginkgo), as well as executors, stopping criteria and loggers.
 
-Matrix formats are used to represent the system matrix and the vectors of the system. The following are the supported matrix formats (__TODO:__ maybe add links, or better descriptions of the formats):
+Matrix formats are used to represent the system matrix and the vectors of the system. The following are the supported matrix formats (see [this Matrix Format wiki page](https://github.com/ginkgo-project/ginkgo/wiki/Matrix-Formats-in-Ginkgo) for more details):
 
 * `gko::matrix::Dense` - the row-major storage dense matrix format;
 * `gko::matrix::Csr` - the Compressed Sparse Row (CSR) sparse matrix format;
