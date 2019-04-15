@@ -5,8 +5,8 @@ The Ginkgo team is proud to announce the first release of Ginkgo, the next-gener
 
 * __Easy to use.__ Interfaces with cryptic naming schemes and dozens of parameters are a thing of the past. Ginkgo was built with good software design in mind, making simple things simple to express.
 * __High performance.__ Our optimized CUDA kernels ensure you are reaching the potential of today's GPU-accelerated high-end systems, while Ginkgo's open design allows extension to future hardware architectures.
-* __Controllable.__  While Ginkgo can automatically moves your data when needed, you remain in control by optionally specifying when the data is moved and what is its ownership scheme.
-* __Composable.__ Iterative solution of linear systems is an extremely versatile field, where effective methods are built by mixing and match various components. Need a GMRES solver preconditioned with a block-Jacobi enhanced BiCGSTAB? Thanks to its novel linear operator abstraction, Ginkgo can do it!
+* __Controllable.__  While Ginkgo can automatically move your data when needed, you remain in control by optionally specifying when the data is moved and what is its ownership scheme.
+* __Composable.__ Iterative solution of linear systems is an extremely versatile field, where effective methods are built by mixing and matching various components. Need a GMRES solver preconditioned with a block-Jacobi enhanced BiCGSTAB? Thanks to its novel linear operator abstraction, Ginkgo can do it!
 * __Extensible.__ Did not find a component you were looking for? Ginkgo is designed to be easily extended in various ways. You can provide your own loggers, stopping criteria, matrix formats, preconditioners and solvers to Ginkgo and have them integrate as well as the natively supported ones, without the need to modify or recompile the library.
 
 Ease of Use
@@ -50,7 +50,7 @@ Already have an existing application and want to use Ginkgo to implement some pa
 Designed for HPC
 ----------------
 
-Ginkgo is designed to quickly adapt to rapid changes in the HPC architecture. Every component in Ginkgo is build around the _executor_ abstraction which is used to describe the execution and memory spaces where the operations are run, and the programming model used to realize the operations. The low-level performance critical kernels are implemented directly using each executor's programming model, while the high-level operation use a unified implementation that calls the low-level kernels. Consequently, the cost of developing new algorithms and extending existing ones to new architectures is kept relatively low, without compromising performance.
+Ginkgo is designed to quickly adapt to rapid changes in the HPC architecture. Every component in Ginkgo is built around the _executor_ abstraction which is used to describe the execution and memory spaces where the operations are run, and the programming model used to realize the operations. The low-level performance critical kernels are implemented directly using each executor's programming model, while the high-level operations use a unified implementation that calls the low-level kernels. Consequently, the cost of developing new algorithms and extending existing ones to new architectures is kept relatively low, without compromising performance.
 Currently, Ginkgo supports CUDA, reference and OpenMP executors.
 
 The CUDA executor features highly-optimized kernels able to efficiently utilize NVIDIA's latest hardware. Several of these kernels appeared in recent scientific publications, including the optimized COO and CSR SpMV, and the block-Jacobi preconditioner with its adaptive precision version.
@@ -102,7 +102,7 @@ Any linear operator (matrix, solver, preconditioner) can be combined into comple
 * `gko::Combination` - creates a linear combination **&alpha;<sub>1</sub> A<sub>1</sub> + ... + &alpha;<sub>n</sub> A<sub>n</sub>** of linear operators;
 * `gko::Composition` - creates a composition **A<sub>1</sub> ... A<sub>n</sub>** of linear operators.
 
-You can utilize these utilities (together with a solvers which represent the inversion operation) to compute complex expressions, such as **x = (3A - B<sup>-1</sup>C)<sup>-1</sup>b**.
+You can utilize these utilities (together with a solver which represents the inversion operation) to compute complex expressions, such as **x = (3A - B<sup>-1</sup>C)<sup>-1</sup>b**.
 
 As described in the "Designed for HPC" section, you have a choice between 3 different executors:
 
