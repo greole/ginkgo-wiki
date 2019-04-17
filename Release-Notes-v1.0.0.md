@@ -1,4 +1,4 @@
-![Ginkgo](https://github.com/ginkgo-project/ginkgo/raw/develop/assets/logo.png) &nbsp;&nbsp; 1.0.0
+![Ginkgo](https://github.com/ginkgo-project/ginkgo/raw/v1.0.0/assets/logo.png) &nbsp;&nbsp; 1.0.0
 ==================================================================================================
 
 The Ginkgo team is proud to announce the first release of Ginkgo, the next-generation high-performance on-node sparse linear algebra library. Ginkgo leverages the features of modern C++ to give you a tool for the iterative solution of linear systems that is:
@@ -12,7 +12,7 @@ The Ginkgo team is proud to announce the first release of Ginkgo, the next-gener
 Ease of Use
 -----------
 
-Ginkgo uses high level abstractions to develop an efficient and understandable vocabulary for high-performance iterative solution of linear systems. As a result, the solution of a system stored in [matrix market format](https://math.nist.gov/MatrixMarket/formats.html) via a preconditioned Krylov solver on an accelerator is only [20 lines of code away](https://github.com/ginkgo-project/ginkgo/blob/develop/examples/minimal-cuda-solver/minimal-cuda-solver.cpp):
+Ginkgo uses high level abstractions to develop an efficient and understandable vocabulary for high-performance iterative solution of linear systems. As a result, the solution of a system stored in [matrix market format](https://math.nist.gov/MatrixMarket/formats.html) via a preconditioned Krylov solver on an accelerator is only [20 lines of code away](https://github.com/ginkgo-project/ginkgo/blob/v1.0.0/examples/minimal-cuda-solver/minimal-cuda-solver.cpp):
 
 ```c++
 #include <ginkgo/ginkgo.hpp>
@@ -43,9 +43,9 @@ int main()
 }
 ```
 
-Notice that Ginkgo is not a tool that generates C++. It _is_ C++. So just [install the library](https://github.com/ginkgo-project/ginkgo/blob/develop/INSTALL.md) (which is extremely simple due to its CMake-based build system), include the header and start using Ginkgo in your projects.
+Notice that Ginkgo is not a tool that generates C++. It _is_ C++. So just [install the library](https://github.com/ginkgo-project/ginkgo/blob/v1.0.0/INSTALL.md) (which is extremely simple due to its CMake-based build system), include the header and start using Ginkgo in your projects.
 
-Already have an existing application and want to use Ginkgo to implement some part of it? Check out our [integration example](https://github.com/ginkgo-project/ginkgo/blob/develop/examples/three-pt-stencil-solver/three-pt-stencil-solver.cpp#L144) for a demonstration on how Ginkgo can be used with raw data already available in the application. If your data is in one of the formats supported by Ginkgo, it may be possible to use it directly, without creating a Ginkgo-dedicated copy of it.
+Already have an existing application and want to use Ginkgo to implement some part of it? Check out our [integration example](https://github.com/ginkgo-project/ginkgo/blob/v1.0.0/examples/three-pt-stencil-solver/three-pt-stencil-solver.cpp#L144) for a demonstration on how Ginkgo can be used with raw data already available in the application. If your data is in one of the formats supported by Ginkgo, it may be possible to use it directly, without creating a Ginkgo-dedicated copy of it.
 
 Designed for HPC
 ----------------
@@ -134,28 +134,28 @@ abstract class, while new stopping criteria and loggers by inheriting from the `
 License
 -------
 
-Ginkgo is available under the [BSD 3-clause license](https://github.com/ginkgo-project/ginkgo/blob/develop/LICENSE). Optional third-party tools and libraries needed to run the unit tests, benchmarks, and developer tools are available under their own open-source licenses, but a fully functional installation of Ginkgo can be obtained without any of them. Check [ABOUT-LICENSING.md](https://github.com/ginkgo-project/ginkgo/blob/develop/ABOUT-LICENSING.md) for details.
+Ginkgo is available under the [BSD 3-clause license](https://github.com/ginkgo-project/ginkgo/blob/v1.0.0/LICENSE). Optional third-party tools and libraries needed to run the unit tests, benchmarks, and developer tools are available under their own open-source licenses, but a fully functional installation of Ginkgo can be obtained without any of them. Check [ABOUT-LICENSING.md](https://github.com/ginkgo-project/ginkgo/blob/v1.0.0/ABOUT-LICENSING.md) for details.
 
 Getting Started
 ---------------
 
 To learn how to use Ginkgo, and get ideas for your own projects, take a look at the following examples:
 
-* [`minimal-solver-cuda`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/minimal-cuda-solver) is probably one of the smallest complete programs you can write in Ginkgo, and can be used as a quick reference for assembling Ginkgo's components.
-* [`simple-solver`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/simple-solver) is a slightly more complex example that reads the matrices from files, computes the final residual, and selects a different executor based on the command-line parameter.
-* [`preconditioned-solver`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/preconditioned-solver) is a slightly modified `simple-solver` example that adds that demonstrates how a solver can be enhanced with a preconditioner.
-* [`simple-solver-logging`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/simple-solver-logging) is yet another modification of the `simple-solver` example that prints information about the solution process to the screen by using built-in loggers.
-* [`poisson-solver`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/poisson-solver) is a more elaborate example that builds a small application for the solution of the 1D Poisson equation using Ginkgo.
-* [`three-pt-stencil-solver`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/three-pt-stencil-solver) is a variation of the `poisson_solver` that demonstrates how one could use Ginkgo with software that was not originally designed with Ginkgo support. It encapsulates everything related to Ginkgo in a single function that accepts raw data of the problem and demonstrates how such data can be directly used with Ginkgo's components.
-* [`inverse-iteration`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/inverse-iteration) is another full application that uses Ginkgo's solver as a component for implementing the inverse iteration eigensolver.
+* [`minimal-solver-cuda`](https://github.com/ginkgo-project/ginkgo/tree/v1.0.0/examples/minimal-cuda-solver) is probably one of the smallest complete programs you can write in Ginkgo, and can be used as a quick reference for assembling Ginkgo's components.
+* [`simple-solver`](https://github.com/ginkgo-project/ginkgo/tree/v1.0.0/examples/simple-solver) is a slightly more complex example that reads the matrices from files, computes the final residual, and selects a different executor based on the command-line parameter.
+* [`preconditioned-solver`](https://github.com/ginkgo-project/ginkgo/tree/v1.0.0/examples/preconditioned-solver) is a slightly modified `simple-solver` example that adds that demonstrates how a solver can be enhanced with a preconditioner.
+* [`simple-solver-logging`](https://github.com/ginkgo-project/ginkgo/tree/v1.0.0/examples/simple-solver-logging) is yet another modification of the `simple-solver` example that prints information about the solution process to the screen by using built-in loggers.
+* [`poisson-solver`](https://github.com/ginkgo-project/ginkgo/tree/v1.0.0/examples/poisson-solver) is a more elaborate example that builds a small application for the solution of the 1D Poisson equation using Ginkgo.
+* [`three-pt-stencil-solver`](https://github.com/ginkgo-project/ginkgo/tree/v1.0.0/examples/three-pt-stencil-solver) is a variation of the `poisson_solver` that demonstrates how one could use Ginkgo with software that was not originally designed with Ginkgo support. It encapsulates everything related to Ginkgo in a single function that accepts raw data of the problem and demonstrates how such data can be directly used with Ginkgo's components.
+* [`inverse-iteration`](https://github.com/ginkgo-project/ginkgo/tree/v1.0.0/examples/inverse-iteration) is another full application that uses Ginkgo's solver as a component for implementing the inverse iteration eigensolver.
 
-You can also check out Ginkgo's [core](https://github.com/ginkgo-project/ginkgo/tree/develop/core/test) and [reference](https://github.com/ginkgo-project/ginkgo/tree/develop/reference/test) unit tests and [benchmarks](https://github.com/ginkgo-project/ginkgo/tree/develop/benchmark) for more detailed examples of using each of the components. A complete Doxygen-generated reference is available [online](https://ginkgo-project.github.io/ginkgo/doc/develop/), or you can find the same information by directly browsing Ginkgo's [headers](https://github.com/ginkgo-project/ginkgo/tree/develop/include/ginkgo). We are investing significant efforts in maintaining good code quality, so you should not find them difficult to read and understand.
+You can also check out Ginkgo's [core](https://github.com/ginkgo-project/ginkgo/tree/v1.0.0/core/test) and [reference](https://github.com/ginkgo-project/ginkgo/tree/v1.0.0/reference/test) unit tests and [benchmarks](https://github.com/ginkgo-project/ginkgo/tree/v1.0.0/benchmark) for more detailed examples of using each of the components. A complete Doxygen-generated reference is available [online](https://ginkgo-project.github.io/ginkgo/doc/v1.0.0/), or you can find the same information by directly browsing Ginkgo's [headers](https://github.com/ginkgo-project/ginkgo/tree/v1.0.0/include/ginkgo). We are investing significant efforts in maintaining good code quality, so you should not find them difficult to read and understand.
 
 If you want to use your own functionality with Ginkgo, these examples are the best way to start:
 
-* [`custom_logger`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/custom-logger) demonstrates how Ginkgo's logging API can be leveraged to implement application-specific callbacks for Ginkgo's events.
-* [`custom-stopping-criterion`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/custom-stopping-criterion) creates a custom stopping criterion that controls when the solver is stopped from another execution thread.
-* [`custom-matrix-format`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/custom-matrix-format) demonstrates how new linear operators can be created, by modifying the `poisson-solver` example to use a more efficient matrix format designed specifically for this application.
+* [`custom_logger`](https://github.com/ginkgo-project/ginkgo/tree/v1.0.0/examples/custom-logger) demonstrates how Ginkgo's logging API can be leveraged to implement application-specific callbacks for Ginkgo's events.
+* [`custom-stopping-criterion`](https://github.com/ginkgo-project/ginkgo/tree/v1.0.0/examples/custom-stopping-criterion) creates a custom stopping criterion that controls when the solver is stopped from another execution thread.
+* [`custom-matrix-format`](https://github.com/ginkgo-project/ginkgo/tree/v1.0.0/examples/custom-matrix-format) demonstrates how new linear operators can be created, by modifying the `poisson-solver` example to use a more efficient matrix format designed specifically for this application.
 
 Ginkgo's [sources](https://github.com/ginkgo-project/ginkgo) can also serve as a good example, since built-in components are mostly implemented using publicly available utilities.
 
@@ -180,7 +180,7 @@ Thus, all code conforming to the **1.0.0** release will continue to compile and 
 About
 -----
 
-Ginkgo 1.0.0 is brought to you by (__TODO:__ maybe add logos here):
+Ginkgo 1.0.0 is brought to you by:
 
 **Karlsruhe Institute of Technology**, Germany  
 **Universitat Jaume I**, Spain  
