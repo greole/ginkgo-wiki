@@ -211,6 +211,20 @@ Make use of `@internal` doxygen tag. This can be used for any comment which is n
 #### After named tags such as `@param foo`
 The documentation tags which use an additional name should be followed by two spaces in order to better distinguish the text from the doxygen tag. It is also possible to use a line break instead.
 
+### Documenting examples.
+
+It is 
+
+1. First, you can just copy over the [`doc/`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/simple-solver) folder (you can copy it from the example most relevant to you) and adapt your example names and such, then you can modify the actual documentation.  
++ In `tooltip`: A short description of the example.
++ In `short-intro`: The name of the example.
++ In `results.dox`: Run the example and write the output you get.
++ In `kind`: The kind of the example. For different kinds see [the documentation](https://ginkgo-project.github.io/ginkgo/doc/develop/Examples.html). Examples can be of `basic`, `techniques`, `logging`, `stopping_criteria` or `preconditioners`. If your example does not fit any of these categories, feel free to create one.
++ In `intro.dox`: You write an explanation of your code with some introduction similar to what you see in an existing example most relevant to you.
++ In `builds-on`: You write the examples it builds on. 
+
+2. You also need to modify the [examples.hpp.in](https://github.com/ginkgo-project/ginkgo/blob/develop/doc/examples/examples.hpp.in) file. You add the name of the example in the main section and in the section that you specified in the `doc/kind` file in the example documentation.
+
 
 Other programming comments
 ==========================
