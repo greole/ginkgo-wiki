@@ -212,8 +212,7 @@ Make use of `@internal` doxygen tag. This can be used for any comment which is n
 The documentation tags which use an additional name should be followed by two spaces in order to better distinguish the text from the doxygen tag. It is also possible to use a line break instead.
 
 ### Documenting examples.
-
-It is 
+There are two main steps:
 
 1. First, you can just copy over the [`doc/`](https://github.com/ginkgo-project/ginkgo/tree/develop/examples/simple-solver) folder (you can copy it from the example most relevant to you) and adapt your example names and such, then you can modify the actual documentation.  
 + In `tooltip`: A short description of the example.
