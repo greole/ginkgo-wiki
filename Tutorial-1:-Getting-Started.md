@@ -44,7 +44,7 @@ cmake -G "Unix Makefiles" [OPTIONS] .. && make
 ```
 
 where you can replace `[OPTIONS]` with the desired cmake options. 
-To build the reference version of all of the kernels in Ginkgo, use `-DGINKGO_BUILD_REFERENCE={ON,OFF}` (default is `ON`). While these kernels are not the fastest, they can be expected to be correct and hence can be useful for testing.If you want to use optimized OpenMP kernels on the CPU, use `-DGINKGO_BUILD_CUDA={ON,OFF}` (default is `OFF`) and for optimized CUDA kernels on the GPU, use `-DGINKGO_BUILD_CUDA={ON,OFF}` (default is `OFF`).
+To build the reference version of all of the kernels in Ginkgo, use `-DGINKGO_BUILD_REFERENCE={ON,OFF}` (default is `ON`). While these kernels are not the fastest, they can be expected to be correct and hence can be useful for testing.If you want to use optimized OpenMP kernels on the CPU, use `-DGINKGO_BUILD_OMP={ON,OFF}` (default is `OFF`) and for optimized CUDA kernels on the GPU, use `-DGINKGO_BUILD_CUDA={ON,OFF}` (default is `OFF`).
 
 If you want to build Ginkgo's unit tests use `-DGINKGO_BUILD_TESTS={ON,OFF}` (default is `ON`). This will download googletest if you don't have it installed yet.
 
@@ -110,4 +110,4 @@ cd examples/
 
 and choose an example. Change directories into the example directory and run the executable.
 
-Previous: [Building a 2D Poisson Solver](./Tutorial:-Building-a-2D-Poisson-Solver); Next: [Implement: Matrices](./Tutorial-2:-Implement:-Matrices)
+Previous: [Building a Poisson Solver](./Tutorial:-Building-a-Poisson-Solver); Next: [Implement: Matrices](./Tutorial-2:-Implement:-Matrices)
