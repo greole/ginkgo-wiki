@@ -13,13 +13,50 @@ In case you are not familiar with the conjugate gradient method, you can read up
 In Ginkgo, to set up a cg solver, we first have to create a factory. That is done by 
 
 ```c++
-cg::build()
-		.with_criteria(gko::stop::Iteration::build()
-						   .with_max_iters(max_iters)
-						   .on(exec),
-					   gko::stop::ResidualNormReduction<>::build()
-						   .with_reduction_factor(1e-6)
-						   .on(exec))
-		.on(exec);
+    cg::build()
+        .with_criteria(gko::stop::Iteration::build()
+                           .with_max_iters(discretization_points)
+                           .on(reference),
+                       gko::stop::ResidualNormReduction<>::build()
+                           .with_reduction_factor(1e-6)
+                           .on(reference))
+        .on(reference)
+```
+
+Here, we configure our solver to run on our reference executor and to have two stopping criteria.
+The first one will simply stop after as many iterations as we have discretization points. The second one will stop if the residual norm decreases less than 1e-6 in some step.
+
+Next, we want to initialize the solver with a copy of our previously created system matrix. That is done the following way:
+
+```c++
+    cg::build()
+        .with_criteria(gko::stop::Iteration::build()
+                           .with_max_iters(discretization_points)
+                           .on(reference),
+                       gko::stop::ResidualNormReduction<>::build()
+                           .with_reduction_factor(1e-6)
+                           .on(reference))
+        .with_preconditioner(bj::build().on(reference))
+        .on(reference)
+        ->generate(clone(reference, matrix))
+```
+
+To finally solve our system we have to give the solver ownership of our right hand side and solution vector for the time it is working. This is done with `lend(vector)`. To apply the solver to these vectors, we just call `apply`:
+
+```c++
+    cg::build()
+        .with_criteria(gko::stop::Iteration::build()
+                           .with_max_iters(discretization_points)
+                           .on(reference),
+                       gko::stop::ResidualNormReduction<>::build()
+                           .with_reduction_factor(1e-6)
+                           .on(reference))
+        .with_preconditioner(bj::build().on(reference))
+        .on(reference)
+        ->generate(clone(reference, matrix))
+        ->apply(lend(rhs), lend(u));
+```
+
+The solver will now write the calculated solution to our vector u.
 
 Previous: [Implement: Matrices](./Tutorial-2:-Implement:-Matrices); Next: [Optimize: Measuring Performance](./Tutorial-4:-Optimize:-Measuring-Performance)
