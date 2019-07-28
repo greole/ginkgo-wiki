@@ -102,9 +102,9 @@ int main(int argc, char *argv[])
     auto u0 = correct_u(0);
     auto u1 = correct_u(1);
 
-    auto rhs = vec::create(app_exec, gko::dim<2>(discretization_points, 1));
+    auto rhs = vec::create(reference, gko::dim<2>(discretization_points, 1));
     generate_rhs(f, u0, u1, lend(rhs));
-    auto u = vec::create(app_exec, gko::dim<2>(discretization_points, 1));
+    auto u = vec::create(reference, gko::dim<2>(discretization_points, 1));
     for (int i = 0; i < u->get_size()[0]; ++i) {
         u->get_values()[i] = 0.0;
     }
