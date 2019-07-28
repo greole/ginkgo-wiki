@@ -87,6 +87,48 @@ int main(int argc, char *argv[])
 Creating the right hand side and an initial guess vector
 --------------------------------------------------------
 
-We will use 
+We will use u(x) = x^3 as a known solution, so for the right hand side we get f(x) = 3x. Now, we have to create vectors for the solution and the right hand side and fill them with values. As an initial guess, we will just use a vector filled with zeros. For the right hand side, we evaluate f at our discretization points and get the desired values.
+
+```c++
+#include <ginkgo/ginkgo.hpp>
+
+int main(int argc, char *argv[]) 
+{
+.
+.
+.
+    auto correct_u = [](double x) { return x * x * x; };
+    auto f = [](double x) { return 6 * x; };
+    auto u0 = correct_u(0);
+    auto u1 = correct_u(1);
+
+    auto rhs = vec::create(app_exec, gko::dim<2>(discretization_points, 1));
+    generate_rhs(f, u0, u1, lend(rhs));
+    auto u = vec::create(app_exec, gko::dim<2>(discretization_points, 1));
+    for (int i = 0; i < u->get_size()[0]; ++i) {
+        u->get_values()[i] = 0.0;
+    }
+}
+```
+
+where the function `generate_rhs` is something like
+
+```c++
+template <typename Closure>
+void generate_rhs(Closure f, double u0, double u1, gko::matrix::Dense<> *rhs)
+{
+    const auto discretization_points = rhs->get_size()[0];
+    auto values = rhs->get_values();
+    const auto h = 1.0 / (discretization_points + 1);
+    for (int i = 0; i < discretization_points; ++i) {
+        const auto xi = (i + 1) * h;
+        values[i] = -f(xi) * h * h;
+    }
+    values[0] += u0;
+    values[discretization_points - 1] += u1;
+}
+```
+
+In the next step, we will set up a solver and solve the system we just set up.
 
 Previous: [Getting Started](./Tutorial-1:-Getting-Started); Next: [Implement: Solvers](./Tutorial-3:-Implement:-Solvers)
