@@ -3,7 +3,7 @@ Previous: [Building a 2D Poisson Solver](./Tutorial:-Building-a-2D-Poisson-Solve
 Objectives
 ----------
 
-In this tutorial we will gude you though the installation process of Ginkgo. We will explain what software you need to install Ginkgo, how to build Ginkgo, run its unit tests, install it in a system folder, and finally run the examples shipped with it.
+In this tutorial we will guide you though the installation process of Ginkgo. We will explain what software you need to install Ginkgo, how to build Ginkgo, run its unit tests, install it in a system folder, and finally run the examples shipped with it.
 
 Prerequisites
 -------------
@@ -40,7 +40,7 @@ cd build
 In the next step, you have to configure the Ginkgo installation process.
 
 
-If your system supports it, the easiest way to configure your installation is 
+If your system supports it, the easiest way to configure your installation is to use the [CMake curses interface](https://cmake.org/cmake/help/v3.10/manual/ccmake.1.html)
 
 ```sh
 ccmake ..
@@ -51,7 +51,7 @@ and then configure the options as desired. After having generated the CMake conf
 make -j4
 ```
 
-where `4` defines the number of cores you want to use in the compilation.
+where `4` defines the number of cores you want to use in the parallel compilation.
 
 The alternative way for configuring the installation process is to follow the standard cmake build procedure as
 
@@ -68,12 +68,12 @@ and you want to use CUDA kernels, use `-DGINKGO_BUILD_CUDA={ON,OFF}` (default is
 
 If you want to build Ginkgo's unit tests use `-DGINKGO_BUILD_TESTS={ON,OFF}` (default is `ON`). 
 The unit tests are based on googletest, and if there is no googletest installation available on your system,
-the installation process with automatically download and install googletest.
+the cmake build process with automatically download and install googletest.
 
 To build further examples on the functionality of Ginkgo, use `-DGINKGO_BUILD_EXAMPLES={ON,OFF}` (default is `ON`). 
 
 The option `-DGINKGO_DEVEL_TOOLS={ON,OFF}` (default is `ON`) sets up the build system for development. 
-In case you want to implement new algorithms inside Gingko, you should set it to `ON`. If you only
+In case you want to implement new algorithms inside Ginkgo, you *need* set it to `ON`. If you only
 plan to use Ginkgo as a library inside a larger application, you can turn it off.
 
 To build Ginkgo in Debug mode with these options, the cmake build procedure would be
