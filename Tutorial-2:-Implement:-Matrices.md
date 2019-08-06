@@ -3,7 +3,7 @@ Previous: [Getting Started](./Tutorial-1:-Getting-Started); Next: [Implement: So
 Objectives
 ----------
 
-In this tutorial you will learn the basics classes in Ginkgo. We will introduce Ginkgo's executor concept and the `gko::matrix::Dense` matrix class. 
+In this tutorial you will learn about the basic classes of Ginkgo. We will introduce Ginkgo's executor concept and the `gko::matrix::Dense` matrix class. 
 Precisely, we will learn how to create matrices and fill them with the coefficients. 
 Similarly, we will learn about how to create a right-hand-side for the Poisson equation, create an initial guess vector, and compute the residual of the initial guess.
 
@@ -13,14 +13,14 @@ The Ginkgo Reference Executor
 Ginkgo radically separates the algorithms from the hardware-specific kernel realizations.
 
 Currently, there are three kernel realizations available in Ginkgo: 
-The `Reference` kernels are designed as bullet-proof sequential kernels that are 
+The `reference` kernels are designed as bullet-proof sequential kernels that are 
 guaranteed to compute the correct solution.
 Their primary purpose is to ensure the correctness of complex algorithms, 
 and to compute the (exec) solutions in the unit tests checking the correctness of
 the performance-optimized kernels.
-The `OpenMP` kernels employ OpenMP pragmas to leverage the compute power of 
+The `omp` kernels employ OpenMP pragmas to leverage the compute power of 
 multiprocessors such as Multicore CPUs.
-The `Cuda` kernels are implemented in the NVIDIA-specific CUDA programming language 
+The `cuda` kernels are implemented in the NVIDIA-specific CUDA programming language 
 and heavily optimized for efficient usage of NVIDIA GPUs.
 
 To specify which kernel implementation should be used, 
@@ -29,7 +29,7 @@ In this step of the tutorial we will use only the (exec) implementations,
 which are handled by the `gko::ReferenceExecutor`.
 In order to create an executor, we need to include the ginkgo header file and create the executor:
 
-```sh
+```c++
 #include <ginkgo/ginkgo.hpp>
 
 int main(int argc, char *argv[]) 
@@ -49,7 +49,7 @@ In this step, we will create a dense matrix and fill it with the coefficients of
 To create a matrix, we have to specify on which executor it should be created, which matrix format we want to use, which data type the entries should be and how large our matrix will be.
 We will create a dense matrix with double entries and one row / column each for every discretization point of our Poisson problem. The following creates such a matrix on our (exec) executor:
 
-```sh
+```c++
 #include <ginkgo/ginkgo.hpp>
 
 int main(int argc, char *argv[]) 
@@ -66,27 +66,27 @@ int main(int argc, char *argv[])
 It is important to pass the executor to the matrix creation function. This becomes obvious when considering that passing a Cuda executor results in the matrix being created on the CUDA-capable GPU.
 
 While the code above creates a dense matrix, replacing
-```sh
+```c++
     using mtx = gko::matrix::Dense<double>;
 ```
 with
-```sh
+```c++
     using mtx = gko::matrix::Csr<double>;
 ```
 or
-```sh
+```c++
     using mtx = gko::matrix::Coo<double>;
 ```
 would create a sparse matrix of CSR and COO type, respectively.
 
-We also note that `gko::dim<2>(discretization_points)` creates a square 100 x 100 matrix. While using larger dimensions allows to cover also tensors, we will later see how to create non-square matrices.
+We also note that `gko::dim<2>(discretization_points)` creates a square matrix of size `discretization_points x distretization_points`. While using larger dimensions(in the angle brackets) allows to cover also tensors. We will later see how to create non-square matrices.
 
 Filling the matrix with values
 ------------------------------
 
 Now, let us fill the matrix with the three point stencil for the Poisson equation. We will do this using the following function:
 
-```sh
+```c++
 void generate_stencil_matrix(gko::matrix::Dense<> *matrix)
 {
     const auto discretization_points = matrix->get_size()[0];
@@ -101,9 +101,9 @@ void generate_stencil_matrix(gko::matrix::Dense<> *matrix)
 }
 ```
 
-To get `generate_stencil_matrix` to actually fill the matrix, we have to temporarily hand over ownership of the matrix (smart pointers) and get it back once the matrix is all set up. This is done by `lend(matrix)`:
+To get `generate_stencil_matrix` to actually fill the matrix, we have to temporarily hand over ownership (smart pointers) of the matrix and get it back once the matrix is all set up. This is done by [`gko::lend(matrix)`](https://ginkgo-project.github.io/ginkgo/doc/develop/namespacegko.html#aa8cb4876b72e5e1036ea9575443c439b):
 
-```sh
+```c++
 #include <ginkgo/ginkgo.hpp>
 
 int main(int argc, char *argv[]) 
@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
 .
     auto matrix = mtx::create((exec), gko::dim<2>(discretization_points));
     
-    generate_stencil_matrix(lend(matrix));
+    generate_stencil_matrix(gko::lend(matrix));
 }
 ```
 
@@ -121,7 +121,8 @@ Creating the right hand side and an initial guess vector
 --------------------------------------------------------
 
 We will use u(x) = x^3 as a known solution, so for the right hand side we get f(x) = 6x. Now, we have to create vectors for the solution and the right hand side and fill them with values. 
-We can handle vectors as dense matrices, i.e. create the vectors as an instance of the dense matrix class. 
+We can handle vectors as dense matrices, i.e. create the vectors as an instance of the dense matrix class (with the `using vec = gko::matrix::Dense<double>`). For example, a single vector is stored as a dense matrix of dimension `n x 1` (n rows and 1 column). This allows us to handle systems with multiple right hand sides as well.
+
 As an initial guess, we will just use a vector filled with zeros. For the right hand side, we evaluate f at our discretization points and get the desired values.
 
 ```c++
@@ -146,8 +147,9 @@ int main(int argc, char *argv[])
     }
 }
 ```
+We use lambda functions to set up our required mathematical functions and you see that the `generate_rhs` takes in these lambdas and computes the values of the vectors at each of the discretization points as required.
 
-where the function `generate_rhs` is something like
+The function `generate_rhs` takes the lambda function and computes the `rhs` vector. 
 
 ```c++
 template <typename Closure>
