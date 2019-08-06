@@ -73,7 +73,7 @@ the cmake build process with automatically download and install googletest.
 To build further examples on the functionality of Ginkgo, use `-DGINKGO_BUILD_EXAMPLES={ON,OFF}` (default is `ON`). 
 
 The option `-DGINKGO_DEVEL_TOOLS={ON,OFF}` (default is `ON`) sets up the build system for development. 
-In case you want to implement new algorithms inside Ginkgo, you *need* set it to `ON`. If you only
+In case you want to implement new algorithms inside Ginkgo, you **need** to set it to `ON`. If you only
 plan to use Ginkgo as a library inside a larger application, you can turn it off.
 
 To build Ginkgo in Debug mode with these options, the cmake build procedure would be
