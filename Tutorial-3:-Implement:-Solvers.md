@@ -13,14 +13,14 @@ In case you are not familiar with the conjugate gradient method, you can read up
 In Ginkgo, to set up a cg solver, we first have to create a solver factory. That is done by 
 
 ```c++
-    cg::build()
-        .with_criteria(gko::stop::Iteration::build()
-                           .with_max_iters(discretization_points)
-                           .on(exec),
-                       gko::stop::ResidualNormReduction<>::build()
-                           .with_reduction_factor(1e-6)
-                           .on(exec))
-        .on(exec)
+    auto solver_factory = cg::build()
+                              .with_criteria(gko::stop::Iteration::build()
+                                                 .with_max_iters(discretization_points)
+                                                 .on(exec),
+                                             gko::stop::ResidualNormReduction<>::build()
+                                                 .with_reduction_factor(1e-6)
+                                                 .on(exec))
+                               .on(exec)
 ```
 
 Here, we configure our solver to run on our `exec` executor and to have two stopping criteria.
@@ -49,15 +49,15 @@ If we do not specify an upper blocksize limit (we use the limit `8` in the examp
 
 ```c++
     using bj = gko::preconditioner::Jacobi<>;
-    cg::build()
-        .with_criteria(gko::stop::Iteration::build()
-                           .with_max_iters(discretization_points)
-                           .on(exec),
-                       gko::stop::ResidualNormReduction<>::build()
-                           .with_reduction_factor(1e-6)
-                           .on(exec))
-        .with_preconditioner(bj::build().with_max_block_size(8u).on(exec))
-            .on(exec);
+    auto solver_factory = cg::build()
+                             .with_criteria(gko::stop::Iteration::build()
+                                                .with_max_iters(discretization_points)
+                                                .on(exec),
+                                            gko::stop::ResidualNormReduction<>::build()
+                                                .with_reduction_factor(1e-6)
+                                                .on(exec))
+                             .with_preconditioner(bj::build().with_max_block_size(8u).on(exec))
+                             .on(exec);
 ```
 We will learn more about sophisticated preconditioner usage in the [Preconditioner Tutorial](./Tutorial-7:-Optimize:-Using-a-Preconditioner).
 
@@ -65,7 +65,7 @@ Once the solver factory is generated, we can create an actual solver instance by
 
 ```c++
     // Create solver
-    auto solver = solver_gen->generate(A);
+    auto solver = solver_factory->generate(A);
 ```
     
 
