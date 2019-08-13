@@ -62,7 +62,10 @@ You can see mainly three blocks. The first blocks sets up the solver with the cr
 Some notes
 ----------
 
-You can see that we always call `synchronize()` before calling the timer. This is to make sure that we are accurate that no other stray tasks pollute our timings and in general it is a good idea to do this especially in the case of the CUDA executor to get accurate timings. 
+You can see that we always call `synchronize()` before calling the timer. 
+This is to make sure that no other stray
+tasks pollute our timings. In general, it is a good idea to do this to get accurate
+timings, especially in the case of the CUDA executor.
 
 
 

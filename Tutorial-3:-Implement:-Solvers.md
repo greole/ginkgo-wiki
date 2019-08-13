@@ -43,8 +43,6 @@ all these parameters and settings (and hence the solver factory) would be locate
 For iterative solvers that can accept a preconditioner, 
 we can extend the solver factory with a preconditioner.
 In the following code, we enhance the CG solver with a block-Jacobi preconditioner.
-We note that we need to pass a copy of the system matrix to the block-Jacobi preconditioner
-as the latter will in-place overwrite the matrix with its block inverse.
 If we do not specify an upper blocksize limit (we use the limit `8` in the example below), the scalar Jacobi preconditioner is used.
 
 ```c++
@@ -65,7 +63,7 @@ Once the solver factory is generated, we can create an actual solver instance by
 
 ```c++
     // Create solver
-    auto solver = solver_factory->generate(A);
+    auto solver = solver_factory->generate(matrix);
 ```
     
 

@@ -25,9 +25,10 @@ and heavily optimized for efficient usage of NVIDIA GPUs.
 
 To specify which kernel implementation should be used, 
 Ginkgo uses so-called `executors` that are passed to every function and routine call. 
-In this step of the tutorial we will use only the (exec) implementations, 
+In this step of the tutorial we will use only the reference implementations, 
 which are handled by the `gko::ReferenceExecutor`.
-In order to create an executor, we need to include the ginkgo header file and create the executor:
+In order to create an executor in general and the reference executor in particular, 
+we need to include the ginkgo header file and create the executor:
 
 ```c++
 #include <ginkgo/ginkgo.hpp>
@@ -79,7 +80,10 @@ or
 ```
 would create a sparse matrix of CSR and COO type, respectively.
 
-We also note that `gko::dim<2>(discretization_points)` creates a square matrix of size `discretization_points x distretization_points`. While using larger dimensions(in the angle brackets) allows to cover also tensors. We will later see how to create non-square matrices.
+We also note that `gko::dim<2>(discretization_points)` creates a square matrix of size `discretization_points x distretization_points`. 
+Larger dimension parameters (used in the angle brackets) will result in
+the creation of tensors.
+We will later see how to create non-square matrices.
 
 Filling the matrix with values
 ------------------------------
