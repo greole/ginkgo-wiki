@@ -30,10 +30,15 @@ When a lot of activity is happening in the develop branch, it is possible to use
 
 The Gitflow Workflow defines a strict branching model designed around the project release. What it does is that it adds specific roles to different branches and defines how and when they should interact.
 
-The base concept is to create a specific release branch, such as `release/1.0.0` where the release can be stabilized, all important pull requests and fixes can be integrated, and the release-specific tests can be execudes. Once the process is completed, the release branch can be integrated into the master branch, and the release process can be started from the master branch.
+The base concept is to create a specific release branch, such as `release/1.0.0` where the release can be stabilized, all important pull requests and fixes can be integrated, and the release-specific tests can be executed. Once the process is completed, the release branch can be integrated into the master branch, and the release process can be started from the master branch.
+
+### Update the external (third party) libraries
+Currently, Ginkgo relies on set versions of third_party tools such as GTest, gflags, RapidJSON and more. The reason for doing this instead of relying on the last commits is that some important changes may happen in the third party package which may suddenly break Ginkgo's usage.
+
+Before proceeding to a new release, it is important to update the external modules to a more recent version. For this process, first check if any new releases are available, then check for any important bug fixes or API changes notified in the software's release notes. Finally, if everything looks correct, try to update the external module. All tests and all code which use the third party tools should be ran on a variety of architectures (if possible, all supported architectures) to ensure that there is no unexpected problems. When no unexpected problems were found the third party packages update can be confirmed. 
 
 ### Check the quality of the release's tests and memory access
-Before releasing, all tests should be run on as many platforms as possible using CI, but if possible it should also be ran on different architectures which we should support such as MacOS. Once normal tests all pass, it is required to check the memory accesses of the release and solve any important bug.
+Before releasing, all tests should be run on as many platforms as possible using CI, but if possible it should also be ran on different architectures which we should support such as MacOS and Windows. Once normal tests all pass, it is required to check the memory accesses of the release and solve any important or easy to fix small bug, in particular identified by clang-tidy, iwyu, sonarqube, etc.
 
 Thanks to CMake, we have support for inspecting our test suite with the `valgrind` tool. It is important to check that there are no major memory access issues before releasing. Failing to do so may cause severe problems for our users.
 
@@ -51,10 +56,7 @@ This will output a summary of the test results in the command line: memcheck pas
 
 The last target, `-T submit` submits the test to the [CDash dashboard](https://my.cdash.org/index.php?project=Ginkgo+Project). This should allow a nice visualization of the results.
 
-### Update the external (third party) libraries
-Currently, Ginkgo relies on set version of third_party tools such as GTest, gflags, RapidJSON and more. The reason for doing this instead of relying on the last commits is that some important changes may happen in the third party package which may suddenly break Ginkgo's usage.
-
-Before proceeding to a new release, it is important to update the external modules to a more recent version. For this process, first check if any new releases are available, then check for any important bug fixes or API changes notified in the software's release notes. Finally, if everything looks correct, try to update the external module. All tests and all code which use the third party tools should be ran on a variety of architectures (if possible, all supported architectures) to ensure that there is no unexpected problems. When no unexpected problems were found the third party packages update can be confirmed. 
+Another alternative is to use the `cmake/CTestScript.cmake` which has its own documentation and allows by passing the correct parameters, to check coverage, run valgrind tests, run sonarqube tests, and more.
 
 ### Write release notes
 It is important to write proper release notes. This will tell the users what they can expect from using this release. There are multiple aspects release notes should include:
