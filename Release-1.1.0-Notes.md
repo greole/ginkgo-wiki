@@ -31,7 +31,7 @@ Additions:
 + Windows Visual studio support (#351)
 + New example showing how to use ParILU as a preconditioner (#358)
 + New example on using loggers to debug Ginkgo (#360)
-+ Add two new 9t and 27 stencil examples (#300, #306)
++ Add two new 9pt and 27pt stencil examples (#300, #306)
 + Allow benchmarking CuSPARSE spmv formats through Ginkgo's benchmarks (#303)
 + New benchmark for conversions (#312, #317)
 + Add conversions between CSR and Hybrid formats (#302, #310)
