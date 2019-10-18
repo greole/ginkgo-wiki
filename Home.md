@@ -9,6 +9,7 @@ Ginkgo is an academic project run by a group of researchers from several institu
 
 In This Wiki
 ------------
+If you are a new user and are facing some compilation issues, please see [FAQ](https://github.com/ginkgo-project/ginkgo/wiki/Frequently-asked-questions-(FAQ)). If you have a different problem/question, please feel free to create an issue with the tag _question_.
 
 Here you will find a collection of resources related to the Ginkgo library. If you want to learn how to use Ginkgo, you can get started with [The Tutorial](./Tutorial:-Building-a-2D-Poisson-Solver) (__under construction__, for now, you can see the syllabus, and what is, or will be available in Ginkgo). If you want to contribute to Ginkgo, or are one of our developers, see the [Developers Homepage](./Developers-Homepage), and especially the [Contributing Guidelines](./Contributing-guidelines). If you think you found a bug in Ginkgo, please use the [Issue Tracker](/ginkgo-project/ginkgo/issues) to report it (please label the issue with _bug_). If you have feature requests or suggestions about the interface or the code, also use the [Issue Tracker](/ginkgo-project/ginkgo/issues), and use the _proposal_ label.
 
