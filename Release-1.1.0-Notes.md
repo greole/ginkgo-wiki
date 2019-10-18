@@ -1,7 +1,7 @@
 The Ginkgo team is proud to announce the new minor release of Ginkgo version
-1.1.0. This release brings several performance fixes, adds Windows support, 
-adds support for factorization inside Ginkgo and a new ILU preconditioner
-based on ParILU factorization, among other things.
+1.1.0. This release brings several performance improvements, adds Windows support, 
+adds support for factorizations inside Ginkgo and a new ILU preconditioner
+based on ParILU algorithm, among other things.
 
 Supported systems and requirements:
 + For all platforms, cmake 3.9+
@@ -25,34 +25,34 @@ page](https://github.com/ginkgo-project/ginkgo/wiki/Known-Issues).
 Additions:
 + Upper and lower triangular solvers (#327, #336, #341, #342)
 + New factorization support in Ginkgo, and addition of the ParILU
-  factorization (#305, #315, #319, #324)
+  algorithm (#305, #315, #319, #324)
 + New ILU preconditioner (#348, #353)
 + Windows MinGW and Cygwin support (#347)
 + Windows Visual studio support (#351)
 + New example showing how to use ParILU as a preconditioner (#358)
-+ New example on using loggers to debug Ginkgo (#360)
++ New example on using loggers for debugging (#360)
 + Add two new 9pt and 27pt stencil examples (#300, #306)
 + Allow benchmarking CuSPARSE spmv formats through Ginkgo's benchmarks (#303)
-+ New benchmark for conversions (#312, #317)
++ New benchmark for sparse matrix format conversions (#312, #317)
 + Add conversions between CSR and Hybrid formats (#302, #310)
-+ Support sorting the CSR format also by column ids (#322)
++ Support for sorting rows in the CSR format by column idices (#322)
 + Addition of a CUDA COO SpMM kernel for improved performance (#345)
-+ Add a LinOp to handle perturbations of the form (identity + scalar *
++ Addition of a LinOp to handle perturbations of the form (identity + scalar *
   basis * projector) (#334)
 + New sparsity matrix representation format with Reference and OpenMP
   kernels (#349, #350)
 
 Fixes:
-+ Fix GMRES solver's performance on CUDA (#363)
-+ Fix BiCGSTAB solver convergence quality (#359)
++ Accelerate GMRES solver for CUDA executor (#363)
++ Fix BiCGSTAB solver convergence (#359)
 + Fix CGS logging by reporting the residual for every sub iteration (#328)
-+ Fix CSR,Dense->Sellp conversion's memory access violation issue (#295)
++ Fix CSR,Dense->Sellp conversion's memory access violation (#295)
 + Accelerate CSR->Ell,Hybrid conversions on CUDA (#313, #318)
 + Fixed slowdown of COO SpMV on OpenMP (#340)
 + Fix gcc 6.4.0 internal compiler error (#316)
 + Fix compilation issue on Apple clang++ 10 (#332)
 + Make Ginkgo able to compile on Intel 2017 and above (#337)
-+ Make the benchmarks spmv/solver have consistent matrix formats (#366)
++ Make the benchmarks spmv/solver use the same matrix formats (#366)
 + Fix self-written isfinite function (#348)
 
 Tools and ecosystem:
