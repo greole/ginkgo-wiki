@@ -1,4 +1,4 @@
-## Frequently asked questions
+
 This page is meant to answer some of the frequently asked questions users might face when starting with Ginkgo.
 
 
