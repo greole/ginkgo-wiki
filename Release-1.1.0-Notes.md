@@ -52,6 +52,7 @@ Fixes:
 + Fix gcc 6.4.0 internal compiler error (#316)
 + Fix compilation issue on Apple clang++ 10 (#332)
 + Make Ginkgo able to compile on Intel 2017 and above (#337)
++ Make the benchmarks spmv/solver have consistent matrix formats (#366)
 + Fix self-written isfinite function (#348)
 
 Tools and ecosystem:
