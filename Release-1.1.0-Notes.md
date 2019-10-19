@@ -54,6 +54,7 @@ Fixes:
 + Make Ginkgo able to compile on Intel 2017 and above ([#337](https://github.com/ginkgo-project/ginkgo/issues/337))
 + Make the benchmarks spmv/solver use the same matrix formats ([#366](https://github.com/ginkgo-project/ginkgo/issues/366))
 + Fix self-written isfinite function ([#348](https://github.com/ginkgo-project/ginkgo/issues/348))
++ Fix Jacobi issues shown by cuda-memcheck
 
 Tools and ecosystem:
 + Multiple improvements to the CI system and tools ([#296](https://github.com/ginkgo-project/ginkgo/issues/296), [#311](https://github.com/ginkgo-project/ginkgo/issues/311), [#365](https://github.com/ginkgo-project/ginkgo/issues/365))
