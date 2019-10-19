@@ -63,3 +63,4 @@ Tools and ecosystem:
 + Improve Ginkgo's support of xSDK M12 policy by adding the `TPL_` arguments
   to CMake ([#300](https://github.com/ginkgo-project/ginkgo/issues/300))
 + Add support for the xSDK R7 policy ([#325](https://github.com/ginkgo-project/ginkgo/issues/325))
++ Fix examples in html documentation ([#367](https://github.com/ginkgo-project/ginkgo/issues/367))
