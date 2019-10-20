@@ -111,7 +111,7 @@ Once the release milestone is complete, all tests pass properly, important bugs 
 
 This process is simplifiied thanks to the respective [Github](https://help.github.com/articles/creating-releases/) and [Gitlab](https://docs.gitlab.com/ee/workflow/releases.html) release processes. Both processes work similarly. In general, we should be using only the Github one because our Gitlab page is private, except for the mirrored ``develop'' branch.
 
-The general process is only to create a [git tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging) with some information attached to it. This information should at least include the compiled release notes, and, if available, links to the compiled binaries (both Github and Gitlab allow you to update compiled binaries). In Github, the page is accessible [from the repository's main page's release tab](https://github.com/ginkgo-project/ginkgo/releases).
+The general process is only to create a [git tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging) with some information attached to it. This information should at least include the compiled release notes, and, if available, links to the compiled binaries (both Github and Gitlab allow you to update compiled binaries). In Github, the page is accessible [from the repository's main page's release tab](https://github.com/ginkgo-project/ginkgo/releases). It is required to add the tag as a "protected tag" in the repository as soon as it is published for proper CI system execution.
 
 __TODO__ we should probably ensure to add a signing key for the release.
 
