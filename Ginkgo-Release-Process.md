@@ -102,7 +102,7 @@ popd
 pushd Debug
 ctest -T build -T test -T submit
 popd
-cpack -G TGZ,ZIP,<other formats>
+cpack -G TGZ -G ZIP -G<other formats>
 ```
 
 Publishing the Release
