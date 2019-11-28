@@ -40,7 +40,7 @@ cd build
 In the next step, you have to configure the Ginkgo installation process.
 
 
-If your system supports it, the easiest way to configure your installation is to use the [CMake interface](https://cmake.org/cmake/help/v3.10/manual/ccmake.1.html)
+If your system supports it, the easiest way to configure your installation is to use the [CMake curses interface](https://cmake.org/cmake/help/v3.10/manual/ccmake.1.html)
 
 ```sh
 ccmake ..
