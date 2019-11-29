@@ -1,6 +1,6 @@
 [Home](./)  
 
-[Tutorial: Building a 2D Poisson Solver](./Tutorial:-Building-a-2D-Poisson-Solver)  
+[Tutorial: Building a Poisson Solver](./Tutorial:-Building-a-Poisson-Solver)  
 1.  [Getting Started](./Tutorial-1:-Getting-Started)
 2.  [Implement: Matrices](./Tutorial-2:-Implement:-Matrices)
 3.  [Implement: Solvers](./Tutorial-3:-Implement:-Solvers)
