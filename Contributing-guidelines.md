@@ -168,8 +168,28 @@ _Example_: A file `core/base/my_file.cpp` might have an include list like this:
 #include "core/base/my_file_kernels.hpp"
 ```
 
-_Note_: ClangFormat will take care of sorting the includes alphabetically in each group.
-`dev_tools/script/format_header` will take care of the group of includes according to this guideline.
+Main header
+-----------
+
+General rules:
+1. Some fixed main header.
+2. components:
+  - with `_kernel` suffix looks for the header in the same folder.
+  - without `_kernel` suffix looks for the header in `core`.
+3. `test/utils`: looks for the header in `core`
+4. `core`: looks for the header in `ginkgo`
+5. `test` or `base`: looks for the header in `ginkgo/core`
+6. others: looks for the header in `core`
+
+_Note_: Please see the detail in the `dev_tools/scripts/config`.
+
+
+Automatic arrange header
+--------------------
+
+1. `dev_tools/script/format_header.sh` will take care of the group/sorting of headers according to this guideline.
+2. `make format_header` arranges the header of the modified files in the branch.
+3. `make format_header_all` arranges the header of all files.
 
 Other Code Formatting not handled by ClangFormat
 ------------------------------------------------
