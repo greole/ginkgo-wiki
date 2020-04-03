@@ -133,10 +133,11 @@ In general, all include statements should be present on the top of the file, ord
 
 1. Related header file (e.g. `core/foo/bar.hpp` included in `core/foo/bar.cpp`, or in the unit test`core/test/foo/bar.cpp`)
 2. Standard library headers (e.g. `vector`)
-3. System third-party library headers (e.g. `omp.h`)
-4. Local third-party library headers
-5. Public Ginkgo headers
-6. Private Ginkgo headers
+3. Executor specific library headers (e.g. `omp.h`)
+4. System third-party library headers (e.g. `papi.h`)
+5. Local third-party library headers
+6. Public Ginkgo headers
+7. Private Ginkgo headers
 
 _Example_: A file `core/base/my_file.cpp` might have an include list like this:
 
@@ -152,6 +153,9 @@ _Example_: A file `core/base/my_file.cpp` might have an include list like this:
 #include <omp.h>
 
 
+#include <papi.h>
+
+
 #include "third_party/blas/cblas.hpp"
 #include "third_party/lapack/lapack.hpp"
 
@@ -165,6 +169,7 @@ _Example_: A file `core/base/my_file.cpp` might have an include list like this:
 ```
 
 _Note_: ClangFormat will take care of sorting the includes alphabetically in each group.
+`dev_tools/script/format_header` will take care of the group of includes according to this guideline.
 
 Other Code Formatting not handled by ClangFormat
 ------------------------------------------------
