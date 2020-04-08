@@ -20,5 +20,4 @@ If you have any questions, comments, or suggestions we would like to hear from y
 
 Hartwig Anzt <hartwig.anzt@kit.edu>  
 Terry Cojean <terry.cojean@kit.edu>  
-Goran Flegar <flegar@uji.es>
 
