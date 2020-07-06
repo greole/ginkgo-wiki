@@ -78,7 +78,7 @@ or
 ```c++
     using mtx = gko::matrix::Coo<double>;
 ```
-would create a sparse matrix of CSR and COO type, respectively.
+would create a sparse matrix of [CSR](./Matrix-Formats-in-Ginkgo.md#gkomatrixcsr) and [COO](./Matrix-Formats-in-Ginkgo.md#gkomatrixcoo) type, respectively.
 
 We also note that `gko::dim<2>(discretization_points)` creates a square matrix of size `discretization_points x distretization_points`. 
 Larger dimension parameters (used in the angle brackets) will result in
